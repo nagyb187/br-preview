@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <base href="/br-preview/">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>Hogyan működik? – Balaton Routing</title>
+  <link rel="icon" type="image/png" href="icon.png" sizes="512x512">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="canonical" href="https://balatonrouting.hu/howto.html">
+  <meta name="description" content="Hogyan számol a Balaton Routing: szélforrások, polár, izokron módszer, sekély sáv, megosztás és GPX – röviden, vitorlázóknak.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://balatonrouting.hu/howto.html">
+  <meta property="og:title" content="Hogyan működik? – Balaton Routing">
+  <meta property="og:description" content="Szélforrások, polár, izokron módszer, sekély sáv, megosztás és GPX – röviden, vitorlázóknak.">
+  <meta property="og:locale" content="hu_HU">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; }
+    .header { background: #1e293b; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; gap: 10px; }
+    .header-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .header-logo { width: 36px; height: 36px; border-radius: 18%; flex-shrink: 0; display: block; }
+    .header h1 { font-size: 1.05rem; font-weight: 600; line-height: 1.15; }
+    .header h1 a { color: inherit; text-decoration: none; }
+    .header-sub { margin: 1px 0 0; font-size: 0.72rem; font-weight: 400; color: #94a3b8; line-height: 1.25; }
+    .header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; margin-left: auto; }
+    a.btn-donate {
+      display: inline-block; width: auto; padding: 6px 11px; margin: 0;
+      border-radius: 999px; background: #fbbf24; color: #0f172a;
+      font-size: 0.78rem; font-weight: 600; text-decoration: none; white-space: nowrap; line-height: 1.2;
+    }
+    a.btn-donate:hover { background: #f59e0b; }
+    .container { padding: 12px; max-width: 760px; margin: 0 auto; padding-bottom: 40px; }
+    .card { background: #1e293b; border-radius: 12px; padding: 18px 18px 8px; margin-bottom: 12px; }
+    .lead { font-size: 1.02rem; line-height: 1.55; color: #e2e8f0; margin-bottom: 14px; }
+    article h2 { font-size: 1.15rem; font-weight: 650; margin: 8px 0 10px; color: #f8fafc; }
+    article p, article li { font-size: 0.95rem; line-height: 1.6; color: #cbd5e1; }
+    article p { margin: 0 0 12px; }
+    article ul { margin: 0 0 14px 1.2em; }
+    article li { margin: 0 0 6px; }
+    article strong { color: #f8fafc; font-weight: 650; }
+    .diagram { background: #f8fafc; border-radius: 12px; overflow: hidden; margin: 8px 0 14px; }
+    .diagram svg { display: block; width: 100%; height: auto; }
+    .caption { font-size: 0.82rem; color: #94a3b8; margin: -6px 0 14px; font-style: italic; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.86em; color: #fde68a; }
+    .site-footer {
+      max-width: 760px; margin: 0 auto; padding: 8px 16px 28px;
+      font-size: 0.8rem; line-height: 1.5; color: #94a3b8;
+    }
+    .site-footer p { margin: 0 0 8px; }
+    .site-footer a { color: #fbbf24; font-weight: 600; text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+    .site-footer .credit { color: #64748b; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-brand">
+      <a href="index.html"><img class="header-logo" src="icon.png" width="36" height="36" alt="Balaton Routing"></a>
+      <div>
+        <a href="https://nbsailing.hu" style="color:#94a3b8;font-size:0.75rem;text-decoration:none;">← nbsailing.hu</a>
+        <h1><a href="index.html">Balaton Routing</a></h1>
+        <p class="header-sub">Hogyan számol a tervező?</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="btn-donate" href="https://ko-fi.com/balatonrouting" target="_blank" rel="noopener">☕ Támogatás</a>
+    </div>
+  </div>
+  <div class="container">
+    <article class="card">
+      <p class="lead">A Balaton Routing egy ingyenes, tájékoztató hobbieszköz. Megadod a hajót, a kezdő- és a célpontot, az indulás idejét és a szélforrásokat — a tervező ezekből kiszámolja, merre érdemes menni, hogy a lehető leghamarabb odaérj. Nem helyettesíti a körültekintő hajózást, a saját ítélőképességet és a hivatalos viharjelzést.</p>
+
+      <h2>Honnan jön a szél?</h2>
+      <p>Kétféle adatot használhatsz, és a kettőt össze is lehet keverni.</p>
+      <p><strong>Az élő mérés</strong> a HungaroMet (met.hu / odp.met.hu) balatoni állomásairól jön. A tervező a közeli állomások szélirányát és átlagsebességét a távolság négyzetével fordítottan súlyozza: minél közelebb van egy állomás, annál jobban számít. A széllökést nem keveri bele, csak az átlagszelet. Ez a mérés <strong>csak akkor használható, ha most indulsz</strong>. Jövőbeli indulásnál a tervező figyelmeztet, hogy a met.hu mérés nem vehető figyelembe.</p>
+      <p><strong>Az előrejelzés</strong> az Open-Meteo modelljeiből jön. Több modellt is bejelölhetsz; a tervező mindegyikre külön útvonalat számol, nem vonja őket egyetlen „átlagszéllé”. A listában most ezek vannak:</p>
+      <ul>
+        <li>ICON-D2 (~2 km, kb. 48 óra) — alapból be van kapcsolva</li>
+        <li>ICON-EU (~7 km, kb. 5 nap)</li>
+        <li>ALADIN CHMI (~2,3 km, kb. 3 nap)</li>
+        <li>AROME GeoSphere (~2,5 km, kb. 3 nap)</li>
+        <li>GFS (hosszabb táv, kb. 10 nap)</li>
+      </ul>
+      <p>A <strong>met.hu keverés</strong> csúszkája azt állítja, hogy az indulás után hány órán át, milyen arányban keveredjen a friss mérés a modellel. Az alapérték 2,0 óra (0 és 2 óra között, negyedórás lépésekben). Az induláskor még teljesen a mérés számít, aztán lineárisan elhalványul, és a beállított idő végére már csak a modell marad. Ha a csúszka nullán van, azonnal a modell érvényes.</p>
+      <p>Ha sem mérés, sem előrejelzés nincs, a kód egy tartalék értéket (délnyugati 6 csomós szél) adna. Ezért a tervező nem számol tovább, mint ameddig az előrejelzés tart.</p>
+      <div class="diagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" role="img" aria-label="A met.hu mérés és a modell keverése az időben">
+          <rect width="640" height="200" fill="#f8fafc"/>
+          <text x="20" y="28" font-family="system-ui,sans-serif" font-size="16" fill="#0f172a">Szélkeverés az indulás után</text>
+          <line x1="60" y1="160" x2="600" y2="160" stroke="#64748b" stroke-width="2"/>
+          <line x1="60" y1="50" x2="60" y2="160" stroke="#64748b" stroke-width="2"/>
+          <polyline points="60,60 420,160" fill="none" stroke="#64748b" stroke-width="4"/>
+          <text x="70" y="55" font-family="system-ui,sans-serif" font-size="13" fill="#475569">met.hu mérés súlya</text>
+          <polyline points="60,160 420,60" fill="none" stroke="#f59e0b" stroke-width="4"/>
+          <text x="250" y="55" font-family="system-ui,sans-serif" font-size="13" fill="#b45309">modell súlya (pl. AROME, ICON-D2)</text>
+          <text x="52" y="178" font-family="system-ui,sans-serif" font-size="13" fill="#334155">indulás</text>
+          <text x="390" y="178" font-family="system-ui,sans-serif" font-size="13" fill="#334155">keverési idő (alap: 2 óra)</text>
+          <text x="520" y="130" font-family="system-ui,sans-serif" font-size="13" fill="#334155">csak modell</text>
+        </svg>
+      </div>
+      <p class="caption">Az ábra: az induláskor a mérés a meghatározó, a csúszkán beállított idő végére már csak a modell.</p>
+
+      <h2>Mi az a polár?</h2>
+      <p>A polár megmondja, hogy egy adott szélben, adott szélirányhoz viszonyított hajózási szögön (TWA) milyen gyorsan megy a hajó. Ebből a tervező tudja, mikor éri meg élesebben vagy meredekebben menni, és mikor kell laskolni.</p>
+      <p>Jelenleg két hajó van a listában. A kódban és a lenyíló menüben pontosan így szerepelnek (a poláradatokhoz a kód nem ír forrást):</p>
+      <ul>
+        <li><strong>Elan 310</strong> — a választó kulcsa <code>elan310</code></li>
+        <li><strong>Aiolos – Elan 295 (HUN 295, ORC)</strong> — a választó kulcsa <code>aiolos</code></li>
+      </ul>
+      <p>Mindkét tábla 6 és 20 csomó közötti szelekre, több szögre (52°–150°) tartalmaz sebességet, és külön éles menetszöget (kb. 39–44°, szél függvényében). 30°-nál kisebb szélirányeltérésen — ez a holtszög — a hajó a modell szerint nem halad. A holtszög és az éles menetszög között a sebesség négyzetesen csökken, hogy a bevitorlázott VMG az éles menetszögnél legyen a legjobb.</p>
+      <p>Ha a te hajód nincs a listában, később saját polárt is be lehet majd küldeni. Addig a két tábla közül a hozzád közelebb állóval tervezz, és kezeld becslésnek.</p>
+
+      <h2>Hogyan működik az izokron módszer?</h2>
+      <p>Nem egyetlen „egyenes vonalat” húz a térképen, hanem időről időre azt nézi: <em>innen, ebből a szélből, merre jutok el a következő lépésben?</em></p>
+      <ul>
+        <li>Az indulópontból sok irányba kiszámolja, meddig jut a hajó egy rövid időlépésben. A lépés általában hat perc körüli, de gyenge szélben vagy a Tihanyi-szorosban rövidebb, hogy a tervező ne „ragadjon be”, és a szűk vízen pontosabb legyen.</li>
+        <li>A vízben maradó, leghamarabb elért pontokból új frontot — izokront — képez: ez az a görbe, ameddig adott idő alatt el lehet jutni.</li>
+        <li>Ezt ismétli, mindig a leggyorsabb határt viszi tovább. A szárazföldre, a tilos vagy sekély sávra eső lépéseket eldobja.</li>
+        <li>Ha a cél közelébe ér (kb. 0,35 tengeri mérföld), az utolsó szakaszt még hozzáadja, és <strong>visszafelé</strong> összeköti a pontokat: ez lesz a javasolt útvonal.</li>
+      </ul>
+      <p>A Tihanyi-szoroson a tervező a kitűzött hajóutat (a kardinálisok közötti „csövet”) külön is figyelembe veszi, hogy ne vágjon át a félszigeten vagy a gázlón.</p>
+      <div class="diagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" role="img" aria-label="Izokron frontok a rajttól a célig">
+          <rect width="640" height="280" fill="#f8fafc"/>
+          <text x="20" y="28" font-family="system-ui,sans-serif" font-size="16" fill="#0f172a">Az izokron: egyre távolabbi időfrontok</text>
+          <ellipse cx="140" cy="160" rx="50" ry="36" fill="none" stroke="#93c5fd" stroke-width="2"/>
+          <ellipse cx="200" cy="150" rx="90" ry="58" fill="none" stroke="#60a5fa" stroke-width="2"/>
+          <ellipse cx="280" cy="145" rx="130" ry="78" fill="none" stroke="#3b82f6" stroke-width="2"/>
+          <ellipse cx="380" cy="140" rx="160" ry="92" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+          <polyline points="140,160 210,138 300,128 400,122 520,118" fill="none" stroke="#0f172a" stroke-width="3"/>
+          <circle cx="140" cy="160" r="7" fill="#22c55e"/>
+          <circle cx="520" cy="118" r="7" fill="#ef4444"/>
+          <text x="118" y="190" font-family="system-ui,sans-serif" font-size="13" fill="#166534">rajt</text>
+          <text x="500" y="108" font-family="system-ui,sans-serif" font-size="13" fill="#991b1b">cél</text>
+          <text x="170" y="250" font-family="system-ui,sans-serif" font-size="13" fill="#334155">minden gyűrű egy későbbi időpont: merre lehet addig eljutni</text>
+          <text x="170" y="268" font-family="system-ui,sans-serif" font-size="13" fill="#334155">a sötét vonal a leggyorsabb ág, visszafelé összekötve</text>
+        </svg>
+      </div>
+
+      <h2>Van-e fordulási büntetés?</h2>
+      <p><strong>Nincs.</strong> A tervező nem ad hozzá plusz időt egy-egy fordulóhoz vagy succhoz. Azt a polár és a holtszög már implicit tartalmazza, hogy élesebben lassabban megy a hajó, de a manőver idejét külön nem modellezi. Éles szélben ezért a számított idő egy kicsit derűlátó lehet.</p>
+
+      <h2>A déli sekély sáv és a part</h2>
+      <p>A tervező nem megy át a szárazföldön, és a Tihanyi-félszigetet külön is tiltott területként kezeli. A déli part mentén figyelembe veszi a <strong>marásvonal</strong> / déli sekély pad sávját (KDTVIZIG-alapú sáv, Szántódnál szakadással), valamint a szoros délkeleti oldalán a Zamárdi–Szántód gázlót. A tihanyi átjárásra a kardinálisok közötti hajóutat használja.</p>
+      <p>Ez nem teljes medertérkép. Nem ismer minden akadályt, mélységváltozást, kikötői és fürdőzónát, mesterséges ívóhelyet vagy munkaterületet. A hivatalos pályajelek, kardinálisok és a Hajósoknak szóló hirdetmények a mérvadók.</p>
+
+      <h2>Mennyi ideig számol?</h2>
+      <p>A horizont <strong>legfeljebb 36 óra</strong>, de rövidebb, ha az előrejelzés hamarabb véget ér — a rövid távú modellek (például az ICON-D2) nem visznek el egy teljes Balaton-kerülőt. Ha a hajó ennyi idő alatt nem ér célba, a tervező a célhoz addig legközelebbi pontig ad részleges útvonalat, és jelzi a hátralévő távot. Nagyon gyenge szélben, hosszú távon (például Keszthely–Almádi 1,5 csomó körül) a 36 óra kevés lehet.</p>
+
+      <h2>Kezdőpont, versenypontok, megosztás és GPX</h2>
+      <p>A kezdőpontot a listából, a <strong>Jelenlegi pozíció</strong> gombbal vagy a térképre koppintva (vagy hosszan nyomva) is beállíthatod. A <strong>Verseny</strong> listából a hivatalosan közölt pályajelek kerülnek a térképre és a Start/Cél listába; ahol a versenyutasítás nem ad GPS-t, ott ezt jelezzük, és nem találunk ki koordinátát. A saját, elnevezett pontok a böngészőben, helyben menthetők.</p>
+      <p>A tervező jelenleg egy szakaszt számol, A-ból B-be. A többbójás pálya (például Kékszalag: Füred–Kenese–Siófok–Keszthely–Füred) későbbi fejlesztés.</p>
+      <p>A <strong>Megosztás</strong> a kiszámolt útvonalat viszi a linkben: a vonal pontjait, az érkezést és azt, hogy mikori előrejelzésből számoltuk. Megnyitáskor a címzett azonnal látja ugyanazt a vonalat, számolás nélkül. Mellé kerül egy „Számold újra friss széllel” gomb; ez nem kötelező. Újraszámolás után a megszokott élő tervezés folytatódik, és a következő megosztás már az új útvonalat adja.</p>
+      <p>A <strong>GPX letöltése</strong> szabványos GPX 1.1-es fájlt ad, útvonallal és nyomvonallal, időbélyegekkel. A nagyobb irányváltások „Pont 1, 2…” néven szerepelnek — ezek nem feltétlenül versenyfordulók, csak a vonal töréspontjai. A fájl chartplotterbe, OpenCPN-be vagy Navionicsba tölthető.</p>
+
+      <h2>Korlátok és felelősség</h2>
+      <p>A tervező tájékoztató jellegű hobbieszköz. Az útvonal tévedhet. Nem helyettesíti a körültekintő hajózást, a saját ítélőképességet, és <strong>nem helyettesíti a hivatalos előrejelzéseket és figyelmeztetéseket, például a viharjelző fényeket</strong>. A használat saját felelősségre történik; a készítő nem vállal felelősséget kárért, például zátonyra futásért.</p>
+
+      <h2>Visszajelzés és saját polár</h2>
+      <p>A visszajelző és polárbeküldő űrlap készül: GitHub-fiók nélkül, a böngészőben nincs (és nem is lesz) GitHub-bejelentkezés. A beküldést egy háttérszolgáltatás rögzíti, Turnstile-lel és korlátozott gyakorisággal védve. Polárnál CSV-sablon lesz, és külön kell majd engedélyt adni a hajónév közzétételére. Az űrlap éles címe az oldalra akkor kerül ki, amikor a rendszer kész.</p>
+      <p>Addig a tervező a Ko-fi oldalon támogatható, de ez nem jár plusz funkcióval.</p>
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p class="footer-links">
+      <a href="index.html">← Vissza a tervezőhöz</a>
+      ·
+      <a href="https://ko-fi.com/balatonrouting" target="_blank" rel="noopener">☕ Támogatás (Ko-fi)</a>
+      ·
+      <a href="https://revolut.me/benedeknagy" target="_blank" rel="noopener">Apple Pay / Google Pay (Revolut)</a>
+    </p>
+    <p>A tervező tájékoztató jellegű hobbieszköz. Nem helyettesíti a körültekintő hajózást és a hivatalos viharjelző fényeket. A használat saját felelősségre történik.</p>
+    <p class="credit">Logó: tóvonal © OpenStreetMap contributors</p>
+  </footer>
+</body>
+</html>

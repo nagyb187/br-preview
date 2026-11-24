@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "note": "Runtime race-mark data for balatonrouting.hu. Only officially published coordinates, plus the existing BYC Szóló presets unchanged. Missing marks are listed as notes, never invented.",
+  "races": [
+    {
+      "id": "byc-szolo",
+      "label": "BYC Szóló (jelenlegi pontok)",
+      "year": null,
+      "sourceUrl": null,
+      "sourceLabel": null,
+      "verifyNote": null,
+      "includeFured": true,
+      "marks": [
+        {
+          "id": "szolo_rajt",
+          "name": "Szóló Rajt",
+          "lat": 46.948063,
+          "lon": 17.897098,
+          "role": "start_and_finish",
+          "rounding": null,
+          "rounding_hu": null
+        },
+        {
+          "id": "szolo_keszthely",
+          "name": "Szóló Keszthely",
+          "lat": 46.756538,
+          "lon": 17.262328,
+          "role": "turning_mark",
+          "rounding": null,
+          "rounding_hu": null
+        },
+        {
+          "id": "szolo_almadi",
+          "name": "Szóló Almádi",
+          "lat": 47.018845,
+          "lon": 18.017193,
+          "role": "turning_mark",
+          "rounding": null,
+          "rounding_hu": null
+        },
+        {
+          "id": "szolo_aliga",
+          "name": "Szóló Aliga",
+          "lat": 46.983157,
+          "lon": 18.156025,
+          "role": "turning_mark",
+          "rounding": null,
+          "rounding_hu": null
+        }
+      ],
+      "convenience": [
+        {
+          "id": "fured",
+          "name": "Balatonfüred előtt",
+          "lat": 46.93878,
+          "lon": 17.91093,
+          "role": "convenience",
+          "rounding": null
+        }
+      ]
+    },
+    {
+      "id": "kekszalag-2026",
+      "label": "Kékszalag 2026",
+      "year": 2026,
+      "sourceUrl": "https://mvszhirdetotabla.hu/58-kekszalag-2026",
+      "sourceLabel": "58. Kékszalag Raiffeisen Nagydíj versenyutasítás 1.1 (2026)",
+      "siUrl": "https://vihar.hunsail.hu:444/api/documents?containerName=Versenyek&fileName=f9026db5-6e89-4063-8973-b7f677936716.pdf",
+      "verifyNote": null,
+      "includeFured": false,
+      "marks": [
+        {
+          "id": "kekszalag_rajt_cel",
+          "name": "Füredi rajt/cél",
+          "lat": 46.9482667,
+          "lon": 17.8948333,
+          "role": "start_and_finish",
+          "rounding": null,
+          "rounding_hu": null,
+          "notes": "A rajtvonal partközeli piros bójája és a célvonal közepe; a VU ugyanazt a GPS-t adja meg. A rajtvonal déli végének nincs közölt koordinátája."
+        },
+        {
+          "id": "kekszalag_1",
+          "name": "Kenese 1.",
+          "lat": 47.0231667,
+          "lon": 18.10535,
+          "role": "turning_mark",
+          "rounding": "starboard",
+          "rounding_hu": "jobb kéz felől"
+        },
+        {
+          "id": "kekszalag_2s",
+          "name": "Siófok 2s (kapu)",
+          "lat": 46.9200667,
+          "lon": 18.03985,
+          "role": "gate",
+          "rounding": "gate",
+          "rounding_hu": "kapu: Keneséről a Tihanyi-szoros felé kell áthaladni"
+        },
+        {
+          "id": "kekszalag_3",
+          "name": "Keszthely 3.",
+          "lat": 46.74755,
+          "lon": 17.27795,
+          "role": "turning_mark",
+          "rounding": "starboard",
+          "rounding_hu": "jobb kéz felől",
+          "notes": "A VU szerint módosult pozíció a 2025-öshöz képest."
+        }
+      ]
+    },
+    {
+      "id": "feher-szalag-2026",
+      "label": "Fehér Szalag 2026",
+      "year": 2026,
+      "sourceUrl": "https://mvszhirdetotabla.hu/feher-szalag-2026",
+      "sourceLabel": "Fehér Szalag / Izsák Szabolcs Emlékverseny versenyutasítás 1.1 (2026)",
+      "siUrl": "https://vihar.hunsail.hu:444/api/documents?containerName=Versenyek&fileName=4cc8fd01-88c9-4fba-a964-6a5cded85611.pdf",
+      "verifyNote": null,
+      "includeFured": false,
+      "marks": [
+        {
+          "id": "feher_rajt_cel",
+          "name": "Füredi rajt/cél",
+          "lat": 46.9482667,
+          "lon": 17.8948333,
+          "role": "start_and_finish",
+          "rounding": null,
+          "rounding_hu": null
+        },
+        {
+          "id": "feher_1",
+          "name": "Kenese 1.",
+          "lat": 47.0231667,
+          "lon": 18.10535,
+          "role": "turning_mark",
+          "rounding": "starboard",
+          "rounding_hu": "jobb kéz felől"
+        },
+        {
+          "id": "feher_2s",
+          "name": "Siófok 2s (kapu)",
+          "lat": 46.9200667,
+          "lon": 18.03985,
+          "role": "gate",
+          "rounding": "gate",
+          "rounding_hu": "kapu: Tihany felé kell áthaladni"
+        },
+        {
+          "id": "feher_3",
+          "name": "Tihany 3.",
+          "lat": 46.9186,
+          "lon": 17.9091667,
+          "role": "turning_mark",
+          "rounding": "starboard",
+          "rounding_hu": "jobb kéz felől",
+          "notes": "A Tihanyi kikötőtől keleti irányban, a félsziget füredi oldalán."
+        }
+      ]
+    },
+    {
+      "id": "flexfleet-2026",
+      "label": "Flexfleet Klasszikus Szóló 2026",
+      "year": 2026,
+      "sourceUrl": "https://www.thesail.hu/flexfleet-klasszikus-szolo-05-08-10/",
+      "sourceLabel": "THE Sail – Flexfleet Klasszikus Szóló 2026 versenykiírás és versenyutasítás",
+      "siUrl": "https://www.thesail.hu/wp-content/uploads/2026/05/VUKlasszikusSzolo-2026.pdf",
+      "verifyNote": null,
+      "includeFured": false,
+      "marks": [
+        {
+          "id": "flex_1",
+          "name": "Almádi–Fűzfő (módosított)",
+          "lat": 47.031134,
+          "lon": 18.0427597,
+          "role": "turning_mark",
+          "rounding": "starboard",
+          "rounding_hu": "jobb oldalra kell venni",
+          "notes": "A 2026-os versenyutasításban módosított pozíció."
+        },
+        {
+          "id": "flex_kapu_rev",
+          "name": "Tihany rév (kapu)",
+          "lat": 46.888248,
+          "lon": 17.892599,
+          "role": "gate",
+          "rounding": "gate",
+          "rounding_hu": "a kapu jelei között kell áthaladni"
+        },
+        {
+          "id": "flex_3",
+          "name": "Keszthely",
+          "lat": 46.7333843,
+          "lon": 17.2768983,
+          "role": "turning_mark",
+          "rounding": "starboard",
+          "rounding_hu": "jobb oldalra kell venni"
+        }
+      ]
+    },
+    {
+      "id": "ezustszalag-2025",
+      "label": "Ezüstszalag 2025 (2025-ös adat, ellenőrizendő)",
+      "year": 2025,
+      "sourceUrl": "https://spartacus.hu/media/2025/03/ESZ_SI_2025_v1.pdf",
+      "sourceLabel": "IT Klima Service Ezüst Szalag versenyutasítás, 2025",
+      "siUrl": "https://spartacus.hu/media/2025/03/ESZ_SI_2025_v1.pdf",
+      "verifyNote": "2025-ös hivatalos koordináta. A 2026-os versenyutasítást élesítés előtt egyeztetni kell.",
+      "includeFured": false,
+      "marks": [
+        {
+          "id": "ezust_gyorok",
+          "name": "Györök 1.",
+          "lat": 46.731578,
+          "lon": 17.357918,
+          "role": "turning_mark",
+          "rounding": "port",
+          "rounding_hu": "bal kézről kell elhagyni"
+        }
+      ]
+    }
+  ]
+}

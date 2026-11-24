@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <base href="/br-preview/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <!-- TERVEZET: a noindex-et Bence jóváhagyása után vegyük ki. -->
+  <meta name="robots" content="noindex">
+  <title>Adatkezelési tájékoztató – Balaton Routing</title>
+  <meta name="description" content="Milyen adatok keletkeznek a balatonrouting.hu használatakor, és kik kezelik őket.">
+  <link rel="icon" type="image/png" href="icon.png" sizes="512x512">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="canonical" href="https://balatonrouting.hu/adatkezeles.html">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.55; }
+    .header { background: #1e293b; padding: 10px 16px; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 10; }
+    .header-logo { width: 36px; height: 36px; border-radius: 18%; flex-shrink: 0; display: block; }
+    .header h1 { font-size: 1.05rem; font-weight: 600; line-height: 1.15; }
+    .header-sub { font-size: 0.72rem; color: #94a3b8; }
+    .header a.back { color: #94a3b8; font-size: 0.75rem; text-decoration: none; }
+    .container { max-width: 820px; margin: 0 auto; padding: 12px 12px 40px; }
+    .card { background: #1e293b; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+    h2 { font-size: 1.25rem; margin-bottom: 6px; }
+    h3 { font-size: 1rem; margin-bottom: 8px; color: #f8fafc; }
+    p, li { font-size: 0.92rem; color: #cbd5e1; }
+    p + p, p + ul, ul + p { margin-top: 8px; }
+    ul { margin-left: 20px; }
+    li + li { margin-top: 4px; }
+    a { color: #fbbf24; font-weight: 600; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.84em; background: #0f172a; padding: 1px 5px; border-radius: 4px; }
+    .muted { color: #94a3b8; font-size: 0.82rem; }
+    .draft { background: #422006; border: 1px solid #b45309; color: #fde68a; border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; font-size: 0.88rem; }
+    .draft b { color: #fef3c7; }
+    .review { margin-top: 10px; background: #2a1d05; border-left: 3px solid #f59e0b; color: #fde68a; padding: 6px 10px; border-radius: 0 6px 6px 0; font-size: 0.82rem; }
+    .toc { columns: 2; column-gap: 24px; }
+    .toc li { break-inside: avoid; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; margin-top: 8px; }
+    th, td { text-align: left; vertical-align: top; padding: 7px 6px; border-bottom: 1px solid #334155; color: #cbd5e1; }
+    th { background: #1e40af; color: #fff; font-weight: 600; }
+    .table-wrap { overflow-x: auto; }
+    .site-footer { max-width: 820px; margin: 0 auto; padding: 8px 16px 28px; font-size: 0.8rem; color: #94a3b8; }
+    .site-footer a { color: #fbbf24; }
+    @media (max-width: 600px) {
+      .toc { columns: 1; }
+      .card { padding: 14px 12px; }
+      h2 { font-size: 1.12rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img class="header-logo" src="icon.png" width="36" height="36" alt="Balaton Routing">
+    <div>
+      <a class="back" href="./">← vissza a tervezőhöz</a>
+      <h1>Balaton Routing</h1>
+      <p class="header-sub">Adatkezelési tájékoztató</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="draft">
+      <b>TERVEZET – Bence átnézésére, még nem végleges.</b> A sárga „Jogásznak” dobozok azokat a pontokat jelölik, amelyeket élesítés előtt szakembernek érdemes ellenőriznie. Minden állítás a balatonrouting.hu jelenlegi kódján alapul (2026. november 24.). A visszajelzés-űrlap leírása a még nem élesített változatra vonatkozik.
+    </div>
+
+    <div class="card">
+      <h2>Adatkezelési tájékoztató</h2>
+      <p>A Balaton Routing ingyenes, adományokból működő hobbiprojekt. Nincs felhasználói fiók, nincs regisztráció, és e-mail-címet nem kérünk. Az oldal maga nem állít be sütit (cookie-t). Ez a tájékoztató leírja, milyen adat keletkezik a használat közben, hová kerül, és ki kezeli.</p>
+      <ul class="toc" style="margin-top:10px">
+        <li><a href="#kezelo">1. Ki az adatkezelő?</a></li>
+        <li><a href="#tarhely">2. Az oldal kiszolgálása</a></li>
+        <li><a href="#harmadik">3. Térkép, előrejelzés, széladat</a></li>
+        <li><a href="#pozicio">4. Helymeghatározás, megosztás, GPX</a></li>
+        <li><a href="#meres">5. Látogatottságmérés</a></li>
+        <li><a href="#tarolas">6. Böngészőben tárolt adat</a></li>
+        <li><a href="#visszajelzes">7. Visszajelzés és polár beküldése</a></li>
+        <li><a href="#adomany">8. Adományok</a></li>
+        <li><a href="#email">9. E-mail</a></li>
+        <li><a href="#jogok">10. Jogaid, kapcsolat</a></li>
+      </ul>
+    </div>
+
+    <div class="card" id="kezelo">
+      <h3>1. Ki az adatkezelő?</h3>
+      <p><b>Nagy Benedek</b> magánszemély, a Balaton Routing hobbiprojekt készítője.<br>
+        Kapcsolat: <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a></p>
+      <p>A projekt nem cég, nincs bevétele az adományokon kívül, és nem végez hirdetést vagy profilalkotást.</p>
+      <div class="review">⚖️ Jogásznak: kell-e postai cím vagy más azonosító az adatkezelő megnevezéséhez? Magánszemélyként, adományokból fenntartott oldalnál mely kötelezettségek vonatkoznak ránk?</div>
+    </div>
+
+    <div class="card" id="tarhely">
+      <h3>2. Az oldal kiszolgálása (GitHub Pages, unpkg)</h3>
+      <p>Az oldalt a <b>GitHub Pages</b> (GitHub, Inc.) szolgálja ki. Mint minden weboldal megnyitásakor, a böngésződ ilyenkor elküldi az IP-címedet és a böngésző technikai adatait (pl. típus, nyelv) a kiszolgálónak. Ezekhez a naplókhoz mi nem férünk hozzá, a GitHub kezeli őket.</p>
+      <p>A térképmegjelenítő programkönyvtárat (Leaflet) a böngésző az <b>unpkg.com</b> tartalomszolgáltatótól tölti le. Ő ugyanígy látja a kérést.</p>
+      <p class="muted">GitHub adatvédelmi nyilatkozata: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">docs.github.com</a></p>
+      <div class="review">⚖️ Jogásznak: harmadik országba (USA) irányuló adattovábbítás (GitHub, Cloudflare, unpkg) – szükséges-e erről külön tájékoztatás?</div>
+    </div>
+
+    <div class="card" id="harmadik">
+      <h3>3. Térkép, előrejelzés és széladat</h3>
+      <p>Ezeket a kéréseket a böngésződ <b>közvetlenül</b> küldi a szolgáltatóknak. Mi nem látjuk és nem tároljuk őket. A szolgáltató látja az IP-címedet és a böngésző technikai adatait.</p>
+      <div class="table-wrap"><table>
+        <tr><th>Szolgáltatás</th><th>Mit kér le a böngésző</th><th>A te helyzeted benne van?</th></tr>
+        <tr><td>OpenStreetMap térképcsempék (<code>tile.openstreetmap.org</code>)</td><td>a nézett térképrészlet képei</td><td>Csak annyiban, hogy melyik részletet nézed.</td></tr>
+        <tr><td>OpenSeaMap jelzések (<code>tiles.openseamap.org</code>)</td><td>hajózási jelek rétege</td><td>Csak annyiban, hogy melyik részletet nézed.</td></tr>
+        <tr><td>Open-Meteo előrejelzés (<code>api.open-meteo.com</code>)</td><td>szél-előrejelzés egy <b>rögzített</b>, a Balatont lefedő pontrácsra</td><td>Nem. A rács mindenkinél ugyanaz.</td></tr>
+        <tr><td>HungaroMet mért szél (odp.met.hu)</td><td>A böngésző a <b>saját Cloudflare Workerünket</b> (<code>balaton-szel-odp…workers.dev</code>) hívja, és az tölti le a HungaroMet nyilvános adatát.</td><td>Nem. A HungaroMet nem kapja meg az adataidat. A kérést a Cloudflare kezeli, a Worker nem naplózza és nem tárolja.</td></tr>
+      </table></div>
+      <div class="review">⚖️ Jogásznak: elég-e a szolgáltatók megnevezése, vagy a térképcsempe-kérésekhez (OSM) is külön hozzájárulás vagy tájékoztatás kell?</div>
+    </div>
+
+    <div class="card" id="pozicio">
+      <h3>4. Helymeghatározás, megosztás, GPX</h3>
+      <ul>
+        <li>A „GNSS” pozíciót csak akkor kéri le az oldal, ha megnyomod a gombot, és a böngésződ is engedélyt kér hozzá. A pozíció a böngésződben marad, ott számoljuk vele az útvonalat. Nem küldjük el sehova.</li>
+        <li>A <b>Megosztás</b> gomb egy linket készít, amely tartalmazza a beállításokat és a kiszámolt útvonalat. Ha a kezdőpontod a saját pozíciód volt, akkor annak a koordinátáit is. A link csak akkor kerül bárkihez, ha te elküldöd. Szerverre nem töltjük fel.</li>
+        <li>A <b>GPX letöltése</b> a fájlt a böngésződben állítja elő, és oda menti, ahová te letöltöd.</li>
+      </ul>
+      <div class="review">⚖️ Jogásznak / Bencének: a megosztott link megnyitásakor a link (benne a koordinátákkal) a látogatottságmérésben is megjelenhet oldalcímként (lásd 5. pont). Ezt élesítés előtt a Cloudflare-felületen ellenőrizzük.</div>
+    </div>
+
+    <div class="card" id="meres">
+      <h3>5. Látogatottságmérés (Cloudflare Web Analytics)</h3>
+      <p>A látogatottságot a <b>Cloudflare Web Analytics</b> méri. A Cloudflare leírása szerint nem használ sütit, nem követ más oldalakon, és nem készít profilt. A mérőkód oldalmegtekintéseket, a hivatkozó oldalt, a böngésző és az eszköz típusát, az országot, valamint a betöltési sebesség adatait küldi a Cloudflare-nek. Mi ebből csak <b>összesített</b> statisztikát látunk, egyes látogatókat nem.</p>
+      <p>A mérés közben a Cloudflare is megkapja az IP-címedet, mert ez minden internetes kérésnél így működik.</p>
+      <p class="muted">Cloudflare adatvédelmi nyilatkozata: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></p>
+      <div class="review">⚖️ Jogásznak: a lábléc jelenleg ezt írja: „személyes adat gyűjtése nélkül”. Mivel a Cloudflare a kérés során megkapja az IP-címet, pontosabb lehet a „sütik nélkül, egyéni követés nélkül” megfogalmazás. Kell-e jogalap vagy hozzájárulás ehhez a méréshez?</div>
+    </div>
+
+    <div class="card" id="tarolas">
+      <h3>6. Böngészőben tárolt adat</h3>
+      <p>Az oldal nem állít be sütit. Egyetlen bejegyzést ment a böngésző munkamenet-tárolójába (<code>sessionStorage</code>, kulcs: <code>br_donate_bar</code>). Ez azt jegyzi meg, hogy az adománykérő sávot ebben a munkamenetben már láttad, így nem jelenik meg újra. A böngészőlap bezárásakor törlődik, és nem kerül el sehova.</p>
+      <div class="review">⚖️ Jogásznak: ez a tárolás hozzájárulás nélkül is megengedett-e (szigorúan szükséges, illetve felhasználói kényelmi funkció)?</div>
+    </div>
+
+    <div class="card" id="visszajelzes">
+      <h3>7. Visszajelzés és polár beküldése</h3>
+      <p><b>Fontos: minden beküldés NYILVÁNOS.</b> A Visszajelzés űrlapon beküldött hibabejelentés, javaslat vagy polár <b>nyilvános GitHub-hibajegy</b> lesz a <a href="https://github.com/nagyb187/balatonroute/issues" target="_blank" rel="noopener">nagyb187/balatonroute</a> tárolóban. Bárki elolvashatja, és keresők is indexelhetik. Ne írj bele személyes adatot.</p>
+      <ul>
+        <li><b>Mi kerül a jegybe:</b> amit a mezőkbe írsz (cím, leírás, lépések; polárnál a hajótípus, a hajónév, ha megadod, a forrás, a megjegyzés és a polár CSV). Hibabejelentésnél, ha a jelölőnégyzetet bejelölöd, a böngésző típusa és verziója, az operációs rendszer és az ablakméret (pl. „Safari 18, iOS, 390×844”) is bekerül.</li>
+        <li><b>Mi nem kerül a jegybe:</b> IP-cím, e-mail-cím, név (hacsak magad nem írod bele).</li>
+        <li><b>Robotszűrés (Cloudflare Turnstile):</b> az ellenőrző csak akkor töltődik be, amikor megnyitod az űrlapot. A Turnstile a böngésződ technikai jellemzőit és az IP-címedet vizsgálja, hogy ember vagy-e. Ezt a Cloudflare végzi. Mi csak az eredményt kapjuk meg: sikeres volt-e, és melyik oldalon történt. <a href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener">Turnstile adatvédelem</a></li>
+        <li><b>Visszaélés elleni korlát:</b> a beküldést a saját Cloudflare Workerünk fogadja. Az IP-címedből titkos sóval kivonatot (SHA-256 hash) készít, és ezzel számolja, hány beküldés jött tőled. A só ismerete nélkül a kivonatból nem állítható vissza az IP-cím. A Cloudflare sebességkorlátozója percenként legfeljebb 3 beküldést enged, és a kivonatot ehhez a 60 másodperces időablakhoz használja. Hogy a számlálót belül meddig őrzi, azt a Cloudflare határozza meg. Ha a napi plafon is be van kapcsolva, a kivonat és a napi darabszám legfeljebb 2 napig marad a Cloudflare kulcs–érték tárolójában (KV), utána automatikusan törlődik. Magát az IP-címet a Worker nem tárolja és nem naplózza, és nem is küldi tovább a GitHubnak.</li>
+        <li><b>Hajónév közzététele:</b> a polárlistában a hajó <b>neve</b> csak akkor jelenhet meg, ha ehhez külön hozzájárultál (jelölőnégyzet). Ilyenkor a jegy a <code>publikálható-név</code> címkét kapja. Hozzájárulás nélkül csak a hajótípus kerül a listába. A név ettől még a nyilvános jegyben szerepel, ha megadtad.</li>
+        <li><b>GitHub-fiókkal</b> közvetlenül a GitHubon is nyithatsz jegyet. Ilyenkor a GitHub saját feltételei érvényesek, és a jegy mellett a GitHub-felhasználóneved is látszik.</li>
+        <li><b>Törlés:</b> ha egy beküldött jegyet vagy annak egy részét törölni szeretnéd, írj az <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a> címre, és add meg a jegy számát.</li>
+      </ul>
+      <div class="review">⚖️ Jogásznak: (1) jogalap a beküldött tartalom nyilvános közzétételére és a hajónév-hozzájárulásra; elég-e a jelölőnégyzet, és hogyan lehet visszavonni? (2) Egy hajónév és egy hajótípus együtt egy magánszemély hajótulajdonosra utalhat, ezért kell-e többet tenni? (3) Megőrzési idő: a nyilvános jegyek jelenleg határozatlan ideig maradnak. (4) A sózott IP-kivonat valószínűleg még mindig személyes adatnak (álnevesített adatnak) számít. Kell-e erről külön jogalap, illetve tájékoztatás?</div>
+    </div>
+
+    <div class="card" id="adomany">
+      <h3>8. Adományok (Ko-fi, Revolut)</h3>
+      <p>A „Támogatás” linkek a <a href="https://ko-fi.com/balatonrouting" target="_blank" rel="noopener">Ko-fi</a> és a <a href="https://revolut.me/benedeknagy" target="_blank" rel="noopener">Revolut</a> oldalára visznek. A fizetést teljes egészében ők kezelik, a saját adatvédelmi szabályaik szerint. A balatonrouting.hu semmilyen fizetési adatot nem lát és nem tárol. Az adományról a szolgáltató értesítést küld a készítőnek, abban az ott megadott adatok (pl. név, üzenet) szerepelhetnek.</p>
+      <div class="review">⚖️ Jogásznak: a Ko-fi/Revolut által küldött adományozói adatok (név, üzenet) kezelése a készítő oldalán.</div>
+    </div>
+
+    <div class="card" id="email">
+      <h3>9. E-mail</h3>
+      <p>Ha az <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a> címre írsz, az e-mail-címedet és az üzenetedet csak a válaszadáshoz használjuk. Nem iratunk fel hírlevélre, és nem adjuk tovább.</p>
+      <div class="review">⚖️ Jogásznak / Bencének: meddig őrizzük meg a leveleket? Melyik levelezőszolgáltató kezeli az info@nbsailing.hu fiókot (ő adatfeldolgozó)?</div>
+    </div>
+
+    <div class="card" id="jogok">
+      <h3>10. Jogaid és kapcsolat</h3>
+      <p>Kérdéssel, illetve törlési vagy helyesbítési kéréssel írj az <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a> címre. A harmadik felek (GitHub, Cloudflare, OpenStreetMap, OpenSeaMap, Open-Meteo, unpkg, Ko-fi, Revolut) által kezelt adatokkal kapcsolatban az ő ügyfélszolgálatuk illetékes.</p>
+      <div class="review">⚖️ Jogásznak: az érintetti jogok pontos felsorolása és a panasz lehetősége (NAIH, illetve bíróság) – milyen formában kötelező ezeket feltüntetni?</div>
+      <p class="muted" style="margin-top:10px">Utolsó módosítás: 2026. november 24. (tervezet)</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p><a href="./">← Vissza a tervezőhöz</a> · <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a></p>
+  </footer>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "4441cfd4d44c40bd8c417b41e892a06d"}'></script>
+</body>
+</html>
