@@ -58,6 +58,8 @@ const html = `
           <div><label for="fbBoatType">Hajótípus</label><input id="fbBoatType" maxlength="80" placeholder="pl. Elan 310" autocomplete="off"></div>
           <div><label for="fbBoatName">Hajónév <span class="fb-opt">(nem kötelező)</span></label><input id="fbBoatName" maxlength="80" placeholder="pl. Szélvész" autocomplete="off"></div>
         </div>
+        <label class="chk fb-chk"><input type="checkbox" id="fbConsent"> <span>A hajó tulajdonosa vagyok, vagy engedélyem van rá, és hozzájárulok, hogy a <b>hajó neve</b> megjelenjen a nyilvános jegyben és a nyilvános polárlistában. <span class="fb-opt">(Ha nem jelölöd be, a nevet el sem küldjük, csak a típus látszik.)</span></span></label>
+        <p id="fbNameHint" class="fb-hint" hidden>A hajónevet csak a fenti hozzájárulással küldjük el. Most csak a típus kerül a jegybe.</p>
         <label for="fbSource">A polár forrása</label>
         <select id="fbSource">
           <option value="orc">ORC-bizonyítvány</option>
@@ -74,11 +76,11 @@ const html = `
         </div>
         <div id="fbPreview" class="fb-preview" aria-live="polite"></div>
         <label for="fbNotes">Megjegyzés <span class="fb-opt">(nem kötelező, pl. vitorlázat, terhelés)</span></label>
-        <textarea id="fbNotes" maxlength="4000" rows="2"></textarea>
+        <textarea id="fbNotes" maxlength="4000" rows="2" placeholder="Nyilvános! Ne írj bele vitorlaszámot, nevet, telefonszámot."></textarea>
         <label class="chk fb-chk"><input type="checkbox" id="fbRights"> <span>Jogom van megosztani ezt a polárt, és hozzájárulok, hogy a tervezőben bárki használhassa.</span></label>
-        <label class="chk fb-chk"><input type="checkbox" id="fbConsent"> <span>Hozzájárulok, hogy a <b>hajó neve</b> megjelenjen a nyilvános polárlistában. <span class="fb-opt">(Ha nem jelölöd be, csak a típus látszik.)</span></span></label>
       </div>
 
+      <label class="chk fb-chk fb-ack"><input type="checkbox" id="fbPublicAck"> <span><b>Megértettem, hogy a beküldés nyilvános lesz</b> (nyilvános GitHub-jegy). <span class="fb-opt">Kötelező.</span></span></label>
       <input type="text" name="website" id="fbHp" class="fb-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div id="fbTurnstile" class="fb-ts"></div>
       <div id="fbMsg" class="fb-msg" role="status" aria-live="polite"></div>
@@ -157,10 +159,14 @@ function renderPreview() {
 }
 
 function collect() {
-  const base = { type: state.tab, website: $('fbHp').value, turnstileToken: state.tsToken };
+  const base = { type: state.tab, website: $('fbHp').value, turnstileToken: state.tsToken, publicAck: $('fbPublicAck').checked };
   if (state.tab === 'polar') {
-    return { ...base, boatType: $('fbBoatType').value, boatName: $('fbBoatName').value, source: $('fbSource').value,
-      csv: $('fbCsv').value, notes: $('fbNotes').value, consent: $('fbConsent').checked, rightsConfirmed: $('fbRights').checked };
+    const consent = $('fbConsent').checked;
+    // A hajónév csak hozzájárulással hagyja el a böngészőt.
+    const d = { ...base, boatType: $('fbBoatType').value, source: $('fbSource').value,
+      csv: $('fbCsv').value, notes: $('fbNotes').value, consent, rightsConfirmed: $('fbRights').checked };
+    if (consent && $('fbBoatName').value.trim()) d.boatName = $('fbBoatName').value;
+    return d;
   }
   const d = { ...base, title: $('fbTitleIn').value, description: $('fbDesc').value };
   if (state.tab === 'bug') { d.steps = $('fbSteps').value; if ($('fbEnv').checked) d.env = envSummary(); }
@@ -178,6 +184,7 @@ function clientCheck(d) {
     if (d.title.trim().length < 3) return 'Adj meg egy rövid címet.';
     if (d.description.trim().length < 10) return 'Írd le néhány mondatban (legalább 10 karakter).';
   }
+  if (!d.publicAck) return 'Jelöld be, hogy megértetted: a beküldés nyilvános lesz.';
   if (!CONFIGURED) return `Az online beküldés még nincs bekapcsolva. Addig írj: <a href="mailto:${MAIL}">${MAIL}</a>`;
   if (!d.turnstileToken) return 'Várd meg, amíg a robotellenőrzés (fent) zöld pipát mutat.';
   return '';
@@ -223,6 +230,7 @@ async function submit(ev) {
 function resetForm() {
   $('fbForm').reset();
   $('fbPreview').innerHTML = '';
+  $('fbNameHint').hidden = true;
   $('fbDone').hidden = true;
   $('fbForm').hidden = false;
   showMsg('', '');
@@ -254,6 +262,9 @@ function init() {
   $('fbBackdrop').addEventListener('click', (e) => { if (e.target.id === 'fbBackdrop') closeFeedback(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('fbBackdrop').hidden) closeFeedback(); });
   $('fbForm').addEventListener('submit', submit);
+  const nameHint = () => { $('fbNameHint').hidden = !($('fbBoatName').value.trim() && !$('fbConsent').checked); };
+  $('fbBoatName').addEventListener('input', nameHint);
+  $('fbConsent').addEventListener('change', nameHint);
   let t;
   $('fbCsv').addEventListener('input', () => { clearTimeout(t); t = setTimeout(renderPreview, 250); });
   $('fbFile').addEventListener('change', async (e) => {

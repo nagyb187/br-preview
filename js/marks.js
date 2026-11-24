@@ -28,18 +28,30 @@
     '#raceMeta { line-height: 1.45; overflow-wrap: anywhere; }',
     '#raceMeta a { color: #fbbf24; font-weight: 600; text-decoration: none; }',
     '#raceMeta a:hover { text-decoration: underline; }',
+    '#savePointBlock { margin-top: 12px; padding-top: 12px; border-top: 1px solid #1e293b; scroll-margin-top: 80px; }',
+    '#savePointHint { font-size: 0.85rem; color: #94a3b8; margin: 0 0 8px; line-height: 1.45; }',
+    '#savePointRow { margin-top: 4px; align-items: flex-end; }',
+    '#savePointBtn { width: 100%; min-height: 44px; font-weight: 700; }',
+    '#savePointStatus { margin-top: 6px; }',
     '#savedPointsList { list-style: none; margin: 6px 0 0; padding: 0; }',
-    '#savedPointsList li { display: flex; align-items: center; gap: 8px; margin: 4px 0; font-size: 0.88rem; }',
+    '#savedPointsList li { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 6px 0; font-size: 0.88rem; }',
     '#savedPointsList li span { flex: 1; min-width: 0; }',
-    '#savedPointsList button { width: auto; margin: 0; padding: 4px 8px; font-size: 0.78rem; background: #334155; color: #e2e8f0; }',
+    '#savedPointsList .saved-actions { display: flex; gap: 6px; flex-wrap: wrap; }',
+    '#savedPointsList button { width: auto; margin: 0; padding: 6px 10px; font-size: 0.78rem; background: #334155; color: #e2e8f0; }',
     '#savedPointsList button:hover { background: #475569; }',
-    '#savePointRow { margin-top: 10px; align-items: flex-end; }',
-    '.map-pick-popup { font-size: 0.88rem; color: #0f172a; min-width: 160px; }',
+    '#savedPointsList button.saved-del { background: #7f1d1d; }',
+    '#savedPointsList button.saved-del:hover { background: #991b1b; }',
+    '@media (max-width: 600px) { #savePointRow { align-items: stretch; } #savePointRow > div { width: 100%; } #savePointBtn { width: 100%; } #savedPointsList li { flex-direction: column; align-items: stretch; } }',
+    '.map-pick-popup { font-size: 0.88rem; color: #0f172a; min-width: 200px; }',
     '.map-pick-popup p { margin: 0 0 8px; }',
-    '.map-pick-popup .pick-actions { display: flex; gap: 6px; }',
+    '.map-pick-popup .pick-actions { display: flex; gap: 6px; flex-wrap: wrap; }',
     '.map-pick-popup button { width: auto; flex: 1; margin: 0; padding: 8px 10px; font-size: 0.82rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }',
     '.map-pick-popup .pick-start { background: #3b82f6; color: #fff; }',
     '.map-pick-popup .pick-goal { background: #0f766e; color: #fff; }',
+    '.map-pick-popup .pick-save { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }',
+    '.map-pick-popup .pick-save label { font-size: 0.78rem; font-weight: 600; color: #0f172a; }',
+    '.map-pick-popup .pick-save input { width: 100%; box-sizing: border-box; padding: 6px 8px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.88rem; }',
+    '.map-pick-popup .pick-save-btn { background: #d97706; color: #fff; width: 100%; flex: none; }',
     '.mark-popup { font-size: 0.86rem; color: #0f172a; }',
     '.mark-popup .rounding { color: #334155; margin: 4px 0 8px; }',
     '.leaflet-div-icon.race-mark-icon { background: transparent; border: none; }',
@@ -406,6 +418,8 @@
       var li = document.createElement('li');
       var span = document.createElement('span');
       span.textContent = p.name + ' (' + Number(p.lat).toFixed(5) + ', ' + Number(p.lon).toFixed(5) + ')';
+      var actions = document.createElement('div');
+      actions.className = 'saved-actions';
       var useStart = document.createElement('button');
       useStart.type = 'button';
       useStart.textContent = 'Kezdőpont';
@@ -416,14 +430,21 @@
       useGoal.addEventListener('click', function () { setTargetFromKey(p.id); });
       var del = document.createElement('button');
       del.type = 'button';
+      del.className = 'saved-del';
       del.textContent = 'Törlés';
       del.addEventListener('click', function () { deletePoint(p.id); });
+      actions.appendChild(useStart);
+      actions.appendChild(useGoal);
+      actions.appendChild(del);
       li.appendChild(span);
-      li.appendChild(useStart);
-      li.appendChild(useGoal);
-      li.appendChild(del);
+      li.appendChild(actions);
       box.appendChild(li);
     });
+  }
+
+  function setSaveStatus(msg) {
+    var el = $('savePointStatus');
+    if (el) el.textContent = msg || '';
   }
 
   function savePoint(name, lat, lon) {
@@ -444,6 +465,7 @@
     var keepT = $('targetSelect') && $('targetSelect').value;
     rebuildPointSelects(keepS, keepT);
     renderSavedList();
+    setSaveStatus('Elmentve: ' + rec.name + ' (' + rec.lat.toFixed(5) + ', ' + rec.lon.toFixed(5) + ').');
     return rec;
   }
 
@@ -455,6 +477,7 @@
     var keepT = $('targetSelect') && $('targetSelect').value === id ? 'manual' : ($('targetSelect') && $('targetSelect').value);
     rebuildPointSelects(keepS, keepT);
     renderSavedList();
+    setSaveStatus('');
   }
 
   function currentSaveCandidate() {
@@ -525,13 +548,18 @@
       '<div class="pick-actions">' +
       '<button type="button" class="pick-start" id="pickAsStart">Kezdőpontnak</button>' +
       '<button type="button" class="pick-goal" id="pickAsGoal">Célnak</button>' +
+      '</div>' +
+      '<div class="pick-save">' +
+      '<label for="pickSaveName">Pont neve</label>' +
+      '<input id="pickSaveName" type="text" maxlength="80" placeholder="pl. a kikötőnk" autocomplete="off">' +
+      '<button type="button" class="pick-save-btn" id="pickAsSaved">Mentés pontként</button>' +
       '</div></div>';
     state.pickPopup = L.popup({ closeButton: true, className: 'marks-pick' })
       .setLatLng(latlng)
       .setContent(html)
       .openOn(global.map);
     setTimeout(function () {
-      var s = $('pickAsStart'), g = $('pickAsGoal');
+      var s = $('pickAsStart'), g = $('pickAsGoal'), sv = $('pickAsSaved'), nameEl = $('pickSaveName');
       if (s) s.addEventListener('click', function () {
         setStartFromLatLon(lat, lon, 'Térkép');
         global.map.closePopup();
@@ -539,6 +567,15 @@
       if (g) g.addEventListener('click', function () {
         setTargetFromLatLon(lat, lon, 'Térkép');
         global.map.closePopup();
+      });
+      function doSave() {
+        var rec = savePoint(nameEl ? nameEl.value : '', lat, lon);
+        if (rec) global.map.closePopup();
+        else if (nameEl) nameEl.focus();
+      }
+      if (sv) sv.addEventListener('click', doSave);
+      if (nameEl) nameEl.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter') { ev.preventDefault(); doSave(); }
       });
     }, 0);
   }

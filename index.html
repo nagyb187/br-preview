@@ -20,9 +20,9 @@
   <meta property="og:title" content="Balaton Routing – vitorlás útvonaltervező a Balatonra">
   <meta property="og:description" content="Leggyorsabb vitorlás útvonal a Balatonon hajópolár, élő szélmérés és szél-előrejelzés alapján.">
   <meta property="og:locale" content="hu_HU">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="vendor/leaflet/1.9.4/leaflet.css" />
   <link rel="stylesheet" href="feedback.css">
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="vendor/leaflet/1.9.4/leaflet.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; }
@@ -300,18 +300,22 @@
           </div>
         </div>
       </div>
-      <div class="row" id="savePointRow">
-        <div>
-          <label for="savePointName">Pont mentése</label>
-          <input id="savePointName" type="text" maxlength="80" placeholder="pl. a kikötőnk" autocomplete="off">
+      <div id="savePointBlock">
+        <p class="hint" id="savePointHint">Elmentheted a kezdőpontot, a célt, vagy a térképen kiválasztott pontot. Adj nevet, majd nyomd meg a Pont mentése gombot. A pontok csak ezen a készüléken, a böngészőben maradnak. A térképre koppintva a Mentés pontként gombbal is elmentheted.</p>
+        <div class="row" id="savePointRow">
+          <div>
+            <label for="savePointName">Pont neve</label>
+            <input id="savePointName" type="text" maxlength="80" placeholder="pl. a kikötőnk" autocomplete="off">
+          </div>
+          <div>
+            <button type="button" class="btn-primary" id="savePointBtn">Pont mentése</button>
+          </div>
         </div>
-        <div>
-          <button type="button" class="btn-secondary" id="savePointBtn">Mentés</button>
+        <div class="status" id="savePointStatus"></div>
+        <div id="savedPointsBox" style="margin-top:10px;">
+          <label>Saját pontok</label>
+          <ul id="savedPointsList"></ul>
         </div>
-      </div>
-      <div id="savedPointsBox" style="margin-top:10px;">
-        <label>Saját pontok</label>
-        <ul id="savedPointsList"></ul>
       </div>
     </div>
     <div class="card">
@@ -384,7 +388,7 @@
     </p>
     <p class="disclaimer">A tervező tájékoztató jellegű hobbieszköz. A déli part menti sekély sávot figyelembe veszi, de nem ismerhet minden akadályt, mélységváltozást, kikötői és fürdőzónát. Nem helyettesíti a körültekintő hajózást, a saját ítélőképességet és a hivatalos előrejelzéseket, figyelmeztetéseket (például a viharjelző fényeket). A használat saját felelősségre történik; a készítő nem vállal felelősséget kárért, például zátonyra futásért.</p>
     <p class="credit">Logó: tóvonal © OpenStreetMap contributors</p>
-    <p class="credit">Látogatottságmérés: Cloudflare Web Analytics, sütik nélkül, személyes adat gyűjtése nélkül.</p>
+    <p class="credit">Látogatottságmérés: Cloudflare Web Analytics, sütik nélkül, egyéni követés nélkül. <a href="adatkezeles.html#meres">Kikapcsolható</a>.</p>
   </footer>
   <script src="js/marks.js"></script>
   <script>
@@ -594,7 +598,7 @@ const balatonPolygon = [[46.72568, 17.24369], [46.7256, 17.24619], [46.7282, 17.
         attribution: '&copy; <a href="https://www.openseamap.org" target="_blank" rel="noopener">OpenSeaMap</a> contributors', maxZoom: 18
       }).addTo(map);
       map.attributionControl.addAttribution('Adatbázis: <a href="https://odp.met.hu/" target="_blank" rel="noopener">Meteorológiai Adattár, HungaroMet Nonprofit Zrt.</a>, saját feldolgozás');
-      map.attributionControl.addAttribution('Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>)');
+      map.attributionControl.addAttribution('Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>), módosítva: interpoláció és útvonalszámítás');
       lakePolyLayer = L.polygon(balatonPolygon, {
         color: '#38bdf8', weight: 1.5, fillColor: '#0ea5e9', fillOpacity: 0.08
       }).addTo(map);
@@ -2598,7 +2602,7 @@ const balatonPolygon = [[46.72568, 17.24369], [46.7256, 17.24619], [46.7282, 17.
   <div id="shareToast" role="status" aria-live="polite"></div>
   <!-- Cloudflare Web Analytics -->
   <script type="module" src="js/feedback.js" data-feedback-worker="https://balatonrouting-feedback.4g6gh9h496.workers.dev" data-turnstile-sitekey="TODO-TURNSTILE-SITEKEY"></script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "4441cfd4d44c40bd8c417b41e892a06d"}'></script>
+  <script src="js/analytics.js" data-cf-token="4441cfd4d44c40bd8c417b41e892a06d"></script>
   <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
