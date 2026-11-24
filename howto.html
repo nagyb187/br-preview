@@ -104,7 +104,7 @@
       <p class="caption">Az ábra: az induláskor a mérés a meghatározó, a csúszkán beállított idő végére már csak a modell.</p>
 
       <h2>Mi az a polár?</h2>
-      <p>A polár megmondja, hogy egy adott szélben, adott szélirányhoz viszonyított hajózási szögön (TWA) milyen gyorsan megy a hajó. Ebből a tervező tudja, mikor éri meg élesebben vagy meredekebben menni, és mikor kell laskolni.</p>
+      <p>A polár megmondja, hogy egy adott szélben, adott szélirányhoz viszonyított hajózási szögön (TWA) milyen gyorsan megy a hajó. Ebből a tervező tudja, mikor éri meg élesebben vagy tompábban menni, és mikor érdemes fordulni vagy halzolni.</p>
       <p>Jelenleg két hajó van a listában. A kódban és a lenyíló menüben pontosan így szerepelnek (a poláradatokhoz a kód nem ír forrást):</p>
       <ul>
         <li><strong>Elan 310</strong> — a választó kulcsa <code>elan310</code></li>
@@ -121,7 +121,7 @@
         <li>Ezt ismétli, mindig a leggyorsabb határt viszi tovább. A szárazföldre, a tilos vagy sekély sávra eső lépéseket eldobja.</li>
         <li>Ha a cél közelébe ér (kb. 0,35 tengeri mérföld), az utolsó szakaszt még hozzáadja, és <strong>visszafelé</strong> összeköti a pontokat: ez lesz a javasolt útvonal.</li>
       </ul>
-      <p>A Tihanyi-szoroson a tervező a kitűzött hajóutat (a kardinálisok közötti „csövet”) külön is figyelembe veszi, hogy ne vágjon át a félszigeten vagy a gázlón.</p>
+      <p>A Tihanyi-szoroson a tervező a kitűzött hajóutat (a kardinálisok közötti „csövet”) külön is figyelembe veszi, hogy ne vágjon át a félszigeten vagy a Zamárdi homokpadon.</p>
       <div class="diagram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" role="img" aria-label="Izokron frontok a rajttól a célig">
           <rect width="640" height="280" fill="#f8fafc"/>
@@ -141,14 +141,14 @@
       </div>
 
       <h2>Van-e fordulási büntetés?</h2>
-      <p><strong>Nincs.</strong> A tervező nem ad hozzá plusz időt egy-egy fordulóhoz vagy succhoz. Azt a polár és a holtszög már implicit tartalmazza, hogy élesebben lassabban megy a hajó, de a manőver idejét külön nem modellezi. Éles szélben ezért a számított idő egy kicsit derűlátó lehet.</p>
+      <p><strong>Nincs.</strong> A tervező nem ad hozzá plusz időt egy-egy fordulóhoz vagy halzoláshoz. Azt a polár és a holtszög már implicit tartalmazza, hogy élesebben lassabban megy a hajó, de a manőver idejét külön nem modellezi. Éles szélben ezért a számított idő egy kicsit derűlátó lehet.</p>
 
       <h2>A déli sekély sáv és a part</h2>
-      <p>A tervező nem megy át a szárazföldön, és a Tihanyi-félszigetet külön is tiltott területként kezeli. A déli part mentén figyelembe veszi a <strong>marásvonal</strong> / déli sekély pad sávját (KDTVIZIG-alapú sáv, Szántódnál szakadással), valamint a szoros délkeleti oldalán a Zamárdi–Szántód gázlót. A tihanyi átjárásra a kardinálisok közötti hajóutat használja.</p>
+      <p>A tervező nem megy át a szárazföldön, és a Tihanyi-félszigetet külön is tiltott területként kezeli. A déli part mentén figyelembe veszi a <strong>marásvonal</strong> / déli sekély pad sávját (KDTVIZIG-alapú sáv, Szántódnál szakadással), valamint a szoros délkeleti oldalán a Zamárdi–Szántód homokpadot. A tihanyi átjárásra a kardinálisok közötti hajóutat használja.</p>
       <p>Ez nem teljes medertérkép. Nem ismer minden akadályt, mélységváltozást, kikötői és fürdőzónát, mesterséges ívóhelyet vagy munkaterületet. A hivatalos pályajelek, kardinálisok és a Hajósoknak szóló hirdetmények a mérvadók.</p>
 
       <h2>Mennyi ideig számol?</h2>
-      <p>A horizont <strong>legfeljebb 36 óra</strong>, de rövidebb, ha az előrejelzés hamarabb véget ér — a rövid távú modellek (például az ICON-D2) nem visznek el egy teljes Balaton-kerülőt. Ha a hajó ennyi idő alatt nem ér célba, a tervező a célhoz addig legközelebbi pontig ad részleges útvonalat, és jelzi a hátralévő távot. Nagyon gyenge szélben, hosszú távon (például Keszthely–Almádi 1,5 csomó körül) a 36 óra kevés lehet.</p>
+      <p>A tervező időhorizontja <strong>legfeljebb 36 óra</strong>, vagy rövidebb, ha az adott modell előrejelzése hamarabb véget ér. Az ICON-D2-t kb. 48 órára kéri le; jó szélben egy Balaton-kerülő jellemzően 15–25 óra, tehát a rövid távú modell is elviheti a teljes kört. Hosszú, lassú futamon (például nagyon gyenge szélben, Keszthely–Almádi 1,5 csomó körül) a 36 óra kevés lehet: ha a hajó ennyi idő alatt nem ér célba, a tervező a célhoz addig legközelebbi pontig ad részleges útvonalat, és jelzi a hátralévő távot. Ha több modellt jelölsz ki, mindegyikre külön útvonal készül a saját horizontjáig; a tervező egy útvonalon belül nem vált át automatikusan egy másik modellre.</p>
 
       <h2>Kezdőpont, versenypontok, megosztás és GPX</h2>
       <p>A kezdőpontot a listából, a <strong>Jelenlegi pozíció</strong> gombbal vagy a térképre koppintva (vagy hosszan nyomva) is beállíthatod. A <strong>Verseny</strong> listából a hivatalosan közölt pályajelek kerülnek a térképre és a Start/Cél listába; ahol a versenyutasítás nem ad GPS-t, ott ezt jelezzük, és nem találunk ki koordinátát. A saját, elnevezett pontok a böngészőben, helyben menthetők.</p>
