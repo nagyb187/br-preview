@@ -25,6 +25,8 @@
     .header h1 { font-size: 1.05rem; font-weight: 600; line-height: 1.15; }
     .header h1 a { color: inherit; text-decoration: none; }
     .header-sub { margin: 1px 0 0; font-size: 0.72rem; font-weight: 400; color: #94a3b8; line-height: 1.25; }
+    .header-nb { display: block; margin-top: 3px; font-size: 0.62rem; font-weight: 400; color: #64748b; text-decoration: none; letter-spacing: 0.01em; line-height: 1.2; }
+    .header-nb:hover { color: #94a3b8; text-decoration: underline; }
     .header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; margin-left: auto; }
     a.btn-donate {
       display: inline-block; width: auto; padding: 6px 11px; margin: 0;
@@ -53,6 +55,7 @@
     .site-footer a { color: #fbbf24; font-weight: 600; text-decoration: none; }
     .site-footer a:hover { text-decoration: underline; }
     .site-footer .credit { color: #64748b; font-size: 0.75rem; }
+    .site-footer .impresszum { color: #64748b; font-size: 0.75rem; }
   </style>
 </head>
 <body>
@@ -60,9 +63,9 @@
     <div class="header-brand">
       <a href="index.html"><img class="header-logo" src="icon.png" width="36" height="36" alt="Balaton Routing"></a>
       <div>
-        <a href="https://nbsailing.hu" style="color:#94a3b8;font-size:0.75rem;text-decoration:none;">← nbsailing.hu</a>
         <h1><a href="index.html">Balaton Routing</a></h1>
         <p class="header-sub">Hogyan számol a tervező?</p>
+        <a class="header-nb" href="https://nbsailing.hu" target="_blank" rel="noopener">NB Sailing projekt</a>
       </div>
     </div>
     <div class="header-right">
@@ -111,7 +114,7 @@
         <li><strong>Aiolos – Elan 295 (HUN 295, ORC)</strong> — a választó kulcsa <code>aiolos</code></li>
       </ul>
       <p>Mindkét tábla 6 és 20 csomó közötti szelekre, több szögre (52°–150°) tartalmaz sebességet, és külön éles menetszöget (kb. 39–44°, szél függvényében). 30°-nál kisebb szélirányeltérésen — ez a holtszög — a hajó a modell szerint nem halad. A holtszög és az éles menetszög között a sebesség négyzetesen csökken, hogy a bevitorlázott VMG az éles menetszögnél legyen a legjobb.</p>
-      <p>Ha a te hajód nincs a listában, később saját polárt is be lehet majd küldeni. Addig a két tábla közül a hozzád közelebb állóval tervezz, és kezeld becslésnek.</p>
+      <p>Ha a hajód nincs a listában, <a href="index.html#visszajelzes">saját polárt is beküldhetsz</a>. Addig a két tábla közül a hozzád közelebb állóval tervezz, és kezeld becslésnek.</p>
 
       <h2>Hogyan működik az izokron módszer?</h2>
       <p>Nem egyetlen „egyenes vonalat” húz a térképen, hanem időről időre azt nézi: <em>innen, ebből a szélből, merre jutok el a következő lépésben?</em></p>
@@ -159,8 +162,8 @@
       <h2>Korlátok és felelősség</h2>
       <p>A tervező tájékoztató jellegű hobbieszköz. Az útvonal tévedhet. Nem helyettesíti a körültekintő hajózást, a saját ítélőképességet, és <strong>nem helyettesíti a hivatalos előrejelzéseket és figyelmeztetéseket, például a viharjelző fényeket</strong>. A használat saját felelősségre történik; a készítő nem vállal felelősséget kárért, például zátonyra futásért.</p>
 
-      <h2>Visszajelzés és saját polár</h2>
-      <p>A visszajelző és polárbeküldő űrlap készül: GitHub-fiók nélkül, a böngészőben nincs (és nem is lesz) GitHub-bejelentkezés. A beküldést egy háttérszolgáltatás rögzíti, Turnstile-lel és korlátozott gyakorisággal védve. Polárnál CSV-sablon lesz, és külön kell majd engedélyt adni a hajónév közzétételére. Az űrlap éles címe az oldalra akkor kerül ki, amikor a rendszer kész.</p>
+      <h2 id="sajat-polar">Visszajelzés és saját polár</h2>
+      <p>Saját polárt a tervezőből küldhetsz be, GitHub-fiók nélkül: a hajóválasztónál a „Saját polárt is beküldhetsz” link, vagy a lábléc Visszajelzés linkje nyitja az űrlapot. A beküldést egy háttérszolgáltatás rögzíti, Turnstile-lel és korlátozott gyakorisággal védve. Polárhoz CSV-sablon van, és külön kell engedélyt adni a hajónév közzétételére.</p>
       <p>Addig a tervező a Ko-fi oldalon támogatható, de ez nem jár plusz funkcióval.</p>
     </article>
   </div>
@@ -174,6 +177,7 @@
     </p>
     <p>A tervező tájékoztató jellegű hobbieszköz. Nem helyettesíti a körültekintő hajózást és a hivatalos viharjelző fényeket. A használat saját felelősségre történik.</p>
     <p class="credit">Logó: tóvonal © OpenStreetMap contributors</p>
+    <p class="impresszum">Készítette: Nagy Benedek · <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a> · <a href="https://nbsailing.hu" target="_blank" rel="noopener">nbsailing.hu</a></p>
   </footer>
 </body>
 </html>

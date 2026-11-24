@@ -17,6 +17,16 @@
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; }
     .header { background: #1e293b; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
     .header h1 { font-size: 1.05rem; font-weight: 600; }
+    .header-nb { display: block; margin-top: 3px; font-size: 0.62rem; font-weight: 400; color: #64748b; text-decoration: none; letter-spacing: 0.01em; line-height: 1.2; }
+    .header-nb:hover { color: #94a3b8; text-decoration: underline; }
+    .polar-hint { margin: 8px 0 0; font-size: 0.82rem; line-height: 1.4; color: #94a3b8; }
+    .polar-hint a { color: #fbbf24; font-weight: 600; text-decoration: none; }
+    .polar-hint a:hover { text-decoration: underline; }
+    .site-footer { max-width: 980px; margin: 0 auto; padding: 8px 16px 28px; font-size: 0.8rem; line-height: 1.5; color: #94a3b8; }
+    .site-footer p { margin: 0 0 8px; }
+    .site-footer a { color: #fbbf24; font-weight: 600; text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+    .site-footer .impresszum { color: #64748b; font-size: 0.75rem; }
     .container { padding: 12px; max-width: 980px; margin: 0 auto; padding-bottom: 60px; }
     .card { background: #1e293b; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
     label { display: block; font-size: 0.78rem; color: #94a3b8; margin-bottom: 4px; }
@@ -56,8 +66,8 @@
 <body>
   <div class="header">
     <div>
-      <a href="https://nbsailing.hu" style="color:#94a3b8;font-size:0.75rem;text-decoration:none;">← nbsailing.hu</a>
       <h1>Balaton Polar Isochrone · 21s</h1>
+      <a class="header-nb" href="https://nbsailing.hu" target="_blank" rel="noopener">NB Sailing projekt</a>
     </div>
     <span id="clock" style="font-size:0.8rem;color:#94a3b8;"></span>
   </div>
@@ -68,6 +78,7 @@
         <option value="elan310">Elan 310</option>
         <option value="aiolos">Aiolos – Elan 295 (HUN 295, ORC)</option>
       </select>
+      <p class="polar-hint"><a href="howto.html#sajat-polar" data-open-feedback="polar">Nincs meg a hajód? Saját polárt is beküldhetsz</a></p>
     </div>
     <div class="card">
       <label>Széladatok (HungaroMet, odp.met.hu)</label>
@@ -1646,5 +1657,11 @@ const balatonPolygon = [[46.72568, 17.24369], [46.7256, 17.24619], [46.7282, 17.
     initMap();
     document.getElementById('departAt').value = localDateTimeValue(new Date());
   </script>
+  <footer class="site-footer">
+    <p class="footer-links">
+      <a href="howto.html">Hogyan működik?</a>
+    </p>
+    <p class="impresszum">Készítette: Nagy Benedek · <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a> · <a href="https://nbsailing.hu" target="_blank" rel="noopener">nbsailing.hu</a></p>
+  </footer>
 </body>
 </html>

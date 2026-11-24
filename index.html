@@ -31,6 +31,11 @@
     .header-logo { width: 36px; height: 36px; border-radius: 18%; flex-shrink: 0; display: block; }
     .header h1 { font-size: 1.05rem; font-weight: 600; line-height: 1.15; }
     .header-sub { margin: 1px 0 0; font-size: 0.72rem; font-weight: 400; color: #94a3b8; line-height: 1.25; }
+    .header-nb { display: block; margin-top: 3px; font-size: 0.62rem; font-weight: 400; color: #64748b; text-decoration: none; letter-spacing: 0.01em; line-height: 1.2; }
+    .header-nb:hover { color: #94a3b8; text-decoration: underline; }
+    .polar-hint { margin: 8px 0 0; font-size: 0.82rem; line-height: 1.4; color: #94a3b8; }
+    .polar-hint a { color: #fbbf24; font-weight: 600; text-decoration: none; }
+    .polar-hint a:hover { text-decoration: underline; }
     .container { padding: 12px; max-width: 980px; margin: 0 auto; padding-bottom: 60px; }
     .card { background: #1e293b; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
     label { display: block; font-size: 0.78rem; color: #94a3b8; margin-bottom: 4px; }
@@ -137,6 +142,7 @@
     .site-footer .footer-links { color: #cbd5e1; }
     .site-footer .disclaimer { color: #94a3b8; }
     .site-footer .credit { color: #64748b; font-size: 0.75rem; }
+    .site-footer .impresszum { color: #64748b; font-size: 0.75rem; }
 
     #shareNotice {
       margin: 0 0 8px;
@@ -217,9 +223,9 @@
     <div class="header-brand">
       <img class="header-logo" src="icon.png" width="36" height="36" alt="Balaton Routing">
       <div>
-        <a href="https://nbsailing.hu" style="color:#94a3b8;font-size:0.75rem;text-decoration:none;">← nbsailing.hu</a>
         <h1>Balaton Routing</h1>
         <p class="header-sub">Útvonaltervező balatoni vitorlázóknak</p>
+        <a class="header-nb" href="https://nbsailing.hu" target="_blank" rel="noopener">NB Sailing projekt</a>
       </div>
     </div>
     <div class="header-right">
@@ -234,6 +240,7 @@
         <option value="elan310">Elan 310</option>
         <option value="aiolos">Aiolos – Elan 295 (HUN 295, ORC)</option>
       </select>
+      <p class="polar-hint"><a href="howto.html#sajat-polar" data-open-feedback="polar">Nincs meg a hajód? Saját polárt is beküldhetsz</a></p>
     </div>
     <div class="card">
       <label>Széladatok (HungaroMet, odp.met.hu)</label>
@@ -378,7 +385,8 @@
       <a href="https://ko-fi.com/balatonrouting" target="_blank" rel="noopener">☕ Támogatás (Ko-fi)</a>
       ·
       <a href="https://revolut.me/benedeknagy" target="_blank" rel="noopener">Apple Pay / Google Pay (Revolut)</a>
-      ·
+    </p>
+    <p class="footer-links">
       <a href="howto.html">Hogyan működik?</a>
     </p>
     <p class="footer-links">
@@ -389,6 +397,7 @@
     <p class="disclaimer">A tervező tájékoztató jellegű hobbieszköz. A déli part menti sekély sávot figyelembe veszi, de nem ismerhet minden akadályt, mélységváltozást, kikötői és fürdőzónát. Nem helyettesíti a körültekintő hajózást, a saját ítélőképességet és a hivatalos előrejelzéseket, figyelmeztetéseket (például a viharjelző fényeket). A használat saját felelősségre történik; a készítő nem vállal felelősséget kárért, például zátonyra futásért.</p>
     <p class="credit">Logó: tóvonal © OpenStreetMap contributors</p>
     <p class="credit">Látogatottságmérés: Cloudflare Web Analytics, sütik nélkül, egyéni követés nélkül. <a href="adatkezeles.html#meres">Kikapcsolható</a>.</p>
+    <p class="impresszum">Készítette: Nagy Benedek · <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a> · <a href="https://nbsailing.hu" target="_blank" rel="noopener">nbsailing.hu</a></p>
   </footer>
   <script src="js/marks.js"></script>
   <script>
