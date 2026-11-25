@@ -1,0 +1,34 @@
+# Balaton Routing – visszajelzés Worker
+# Telepítés: lásd worker/README.md. Account ID-t nem tartalmaz (a wrangler a
+# bejelentkezett fiókból veszi, vagy a CLOUDFLARE_ACCOUNT_ID környezeti változóból).
+name = "balatonrouting-feedback"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+preview_urls = false
+
+[vars]
+ALLOWED_ORIGIN = "https://balatonrouting.hu"
+GITHUB_REPO = "nagyb187/balatonroute"
+TURNSTILE_HOSTNAMES = "balatonrouting.hu"
+
+# Titkok (NEM ide kerülnek, hanem `wrangler secret put`):
+#   GITHUB_TOKEN      – finomhangolt PAT, csak nagyb187/balatonroute, Issues: read/write
+#   TURNSTILE_SECRET  – a Turnstile widget titkos kulcsa
+#   IP_SALT           – véletlen szöveg az IP-hash sózásához
+
+# IP-hashenként legfeljebb 3 beküldés / 60 s
+[[ratelimits]]
+name = "SUBMIT_LIMITER"
+namespace_id = "1871"
+
+  [ratelimits.simple]
+  limit = 3
+  period = 60
+
+# Napi plafon (IP-hashenként 10, összesen 150). Az id-t a
+# `wrangler kv namespace create FEEDBACK_KV` adja; addig ez a blokk ki van kommentezve,
+# és a Worker KV nélkül csak a percenkénti limitet alkalmazza.
+# [[kv_namespaces]]
+# binding = "FEEDBACK_KV"
+# id = "<KV_NAMESPACE_ID>"

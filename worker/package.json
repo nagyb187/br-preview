@@ -1,0 +1,13 @@
+{
+  "name": "balatonrouting-feedback-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "wrangler deploy --dry-run --outdir .wrangler-dry",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.167.0"
+  }
+}
