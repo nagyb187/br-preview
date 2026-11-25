@@ -437,7 +437,7 @@
         24: [6.64,6.87,7.24,7.67,8.12,8.64,9.82,9.50]
       },
       beatVMG: [2.15,3.10,3.79,4.27,4.54,4.64,4.68,4.69,4.58],
-      // 2026 ORC Club 006/26 (04890004NPW); stored only, unused by the router for now
+      // 2026 ORC Club 006/26 (04890004NPW); used by the C2 downwind model and polarActions
       runAngles: [136.3,145.8,150.5,152.0,160.0,168.5,175.4,175.7,164.9],
       runVMG: [2.35,3.44,4.38,5.21,5.95,6.48,6.87,7.56,8.37]
     };
@@ -903,9 +903,13 @@ const balatonPolygon = [[46.72568, 17.24369], [46.7256, 17.24619], [46.7282, 17.
       const angles = polar.angles;
       const spAt = idx => W.scale * (polar.speeds[polar.winds[W.i1]][idx] +
         W.rW * (polar.speeds[polar.winds[W.i2]][idx] - polar.speeds[polar.winds[W.i1]][idx]));
+      const c2 = downwindC2(polar, windKt, W, angles, spAt);
       let s;
       if (twa <= NO_GO_TWA) {
         s = 0;
+      } else if (c2 && twa >= c2.a1) {
+        // C2: bizonylat bőszeles optimuma; utána a VMG nem javul
+        s = speedFromC2(c2, twa);
       } else if (twa < beat) {
         // n from the interpolated beat angle so upwind VMG peaks exactly at beat
         const nExp = (beat - NO_GO_TWA) * Math.tan(beat * Math.PI / 180) * Math.PI / 180;
@@ -915,7 +919,7 @@ const balatonPolygon = [[46.72568, 17.24369], [46.7256, 17.24619], [46.7282, 17.
         const r = (twa - beat) / (angles[0] - beat);
         s = beatSpd + r * (spAt(0) - beatSpd);
       } else if (twa >= angles[angles.length - 1]) {
-        // a táblázat utolsó szöge után (hátszél felé) lineáris extrapoláció az utolsó két pontból
+        // nincs bőszeles adat: lineáris extrapoláció a tábla utolsó két pontjából
         const n = angles.length - 1;
         const r = (twa - angles[n]) / (angles[n] - angles[n - 1]);
         s = Math.max(0, spAt(n) + r * (spAt(n) - spAt(n - 1)));
@@ -941,6 +945,112 @@ const balatonPolygon = [[46.72568, 17.24369], [46.7256, 17.24619], [46.7282, 17.
       return ba[0];
     }
 
+    function runAngleAt(polar, windKt) {
+      const ra = polar.runAngles;
+      if (!ra || !ra.length) return null;
+      const winds = polar.winds;
+      if (windKt <= winds[0]) return ra[0];
+      if (windKt >= winds[winds.length - 1]) return ra[ra.length - 1];
+      for (let i = 0; i < winds.length - 1; i++) {
+        if (windKt >= winds[i] && windKt <= winds[i + 1]) {
+          const r = (windKt - winds[i]) / (winds[i + 1] - winds[i]);
+          return ra[i] + r * (ra[i + 1] - ra[i]);
+        }
+      }
+      return ra[0];
+    }
+
+    function hermiteSpeed(th, t0, s0, m0, t1, s1, m1) {
+      const dt = t1 - t0;
+      if (Math.abs(dt) < 1e-15) return s0;
+      const t = (th - t0) / dt;
+      const t2 = t * t, t3 = t2 * t;
+      const h00 = 2 * t3 - 3 * t2 + 1;
+      const h10 = t3 - 2 * t2 + t;
+      const h01 = -2 * t3 + 3 * t2;
+      const h11 = t3 - t2;
+      return h00 * s0 + h10 * dt * m0 + h01 * s1 + h11 * dt * m1;
+    }
+
+    function downwindC2(polar, windKt, W, angles, spAt) {
+      const key = W.i1 + ',' + W.i2 + ',' + W.rW + ',' + W.scale;
+      if (polar._c2 && polar._c2.key === key) return polar._c2.val;
+      let val = null;
+      const ra = polar.runAngles, rv = polar.runVMG;
+      if (ra && ra.length && rv && rv.length) {
+        const run = runAngleAt(polar, windKt);
+        const lerpW = arr => W.scale * (arr[W.i1] + W.rW * (arr[W.i2] - arr[W.i1]));
+        const runVmg = lerpW(rv);
+        if (run > 0 && run === run && runVmg > 0 && runVmg === runVmg) {
+          const idx = [];
+          for (let i = 0; i < angles.length; i++) {
+            if (angles[i] <= run + 1e-9) idx.push(i);
+          }
+          if (idx.length >= 2) {
+            const i2 = idx[idx.length - 1], i1 = idx[idx.length - 2];
+            const a1 = angles[i1], a2 = angles[i2];
+            const s1 = spAt(i1), s2 = spAt(i2);
+            const d2r = Math.PI / 180;
+            const cRun = Math.cos(run * d2r);
+            if (Math.abs(cRun) >= 1e-12) {
+              const runSpd = runVmg / Math.abs(cRun);
+              const V2 = s2 * Math.abs(Math.cos(a2 * d2r));
+              const dth = (a2 - run) * d2r;
+              const A = Math.abs(dth) < 1e-15 ? 0 : (V2 - runVmg) / (dth * dth);
+              const th2 = a2 * d2r;
+              const Vp2 = 2 * A * (th2 - run * d2r);
+              const c2ang = Math.cos(th2);
+              if (Math.abs(c2ang) >= 1e-12) {
+                const sp2 = (s2 * Math.sin(th2) - Vp2) / c2ang;
+                let sp1;
+                if (i1 > 0) {
+                  const a0 = angles[i1 - 1], s0 = spAt(i1 - 1);
+                  const sp1In = (s1 - s0) / ((a1 - a0) * d2r);
+                  const sp1Ch = (s2 - s1) / ((a2 - a1) * d2r);
+                  const lo = Math.min(s1, s2), hi = Math.max(s1, s2);
+                  const factors = [1, 0.8, 0.6, 0.4, 0.2, 0];
+                  sp1 = sp1Ch;
+                  for (let fi = 0; fi < factors.length; fi++) {
+                    const f = factors[fi];
+                    const m = f * sp1In + (1 - f) * sp1Ch;
+                    let ok = true;
+                    for (let k = 0; k <= 500; k++) {
+                      const tw = a1 + (a2 - a1) * k / 500;
+                      const s = hermiteSpeed(tw * d2r, a1 * d2r, s1, m, a2 * d2r, s2, sp2);
+                      if (s > hi + 1e-4 || s < lo - 1e-4) { ok = false; break; }
+                      if (k > 0) {
+                        const prev = a1 + (a2 - a1) * (k - 1) / 500;
+                        const sPrev = hermiteSpeed(prev * d2r, a1 * d2r, s1, m, a2 * d2r, s2, sp2);
+                        const v = s * Math.abs(Math.cos(tw * d2r));
+                        const vPrev = sPrev * Math.abs(Math.cos(prev * d2r));
+                        if (v - vPrev < -1e-6) { ok = false; break; }
+                      }
+                    }
+                    if (ok) { sp1 = m; break; }
+                  }
+                } else {
+                  sp1 = (s2 - s1) / ((a2 - a1) * d2r);
+                }
+                val = { a1, s1, a2, s2, run, runSpd, runVmg, sp1, sp2, A };
+              }
+            }
+          }
+        }
+      }
+      polar._c2 = { key, val };
+      return val;
+    }
+
+    function speedFromC2(c2, twa) {
+      const d2r = Math.PI / 180;
+      if (twa < c2.a2) {
+        return hermiteSpeed(twa * d2r, c2.a1 * d2r, c2.s1, c2.sp1, c2.a2 * d2r, c2.s2, c2.sp2);
+      }
+      const V = Math.max(0, c2.runVmg + c2.A * Math.pow((twa - c2.run) * d2r, 2));
+      const c = Math.cos(twa * d2r);
+      return Math.abs(c) < 1e-12 ? 0 : V / Math.abs(c);
+    }
+
     function polarActions(polar, wind) {
       const acts = [];
       const beat = beatAngleAt(polar, wind.spd);
@@ -950,6 +1060,17 @@ const balatonPolygon = [[46.72568, 17.24369], [46.7256, 17.24619], [46.7282, 17.
         const a = polar.angles[i];
         acts.push({ twa: a, heading: (wind.dir + a) % 360 });
         acts.push({ twa: a, heading: (wind.dir - a + 360) % 360 });
+      }
+      const run = runAngleAt(polar, wind.spd);
+      if (run != null && run === run && Math.abs(run - beat) >= 0.05) {
+        let near = false;
+        for (let i = 0; i < polar.angles.length; i++) {
+          if (Math.abs(polar.angles[i] - run) < 0.05) { near = true; break; }
+        }
+        if (!near) {
+          acts.push({ twa: run, heading: (wind.dir + run) % 360 });
+          acts.push({ twa: run, heading: (wind.dir - run + 360) % 360 });
+        }
       }
       return acts;
     }

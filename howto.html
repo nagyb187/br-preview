@@ -128,14 +128,14 @@
         <li><strong>Elan 310</strong></li>
         <li><strong>Aiolos – Elan 295 (HUN 295, ORC)</strong></li>
       </ul>
-      <p>A két hajó polárja eltérő. Az Elan 310 táblája 6 és 20 csomó közötti szelekre, 52° és 150° közötti TWA-kra ad meg sebességet, és külön éles TWA-t (kb. 39–44°, szél függvényében). Az Aiolos a 2026-os ORC Club-bizonylat (006/26, 04890004NPW) szerint 4–24 csomóra van megadva, éles TWA-val és éles VMG-vel, valamint bőszeles TWA-val és bőszeles VMG-vel; a tervező ezt a 4–24 csomós táblát használja. A bőszeles TWA és a bőszeles VMG a táblában és az ábrán szerepel, a számítás ezeket egyelőre nem veszi figyelembe.</p>
+      <p>A két hajó polárja eltérő. Az Elan 310 táblája 6 és 20 csomó közötti szelekre, 52° és 150° közötti TWA-kra ad meg sebességet, és külön éles TWA-t (kb. 39–44°, szél függvényében). Az Aiolos a 2026-os ORC Club-bizonylat (006/26, 04890004NPW) szerint 4–24 csomóra van megadva, éles TWA-val és éles VMG-vel, valamint bőszeles TWA-val és bőszeles VMG-vel; a tervező ezt a 4–24 csomós táblát használja. A bőszeles TWA és a bőszeles VMG a táblában és az ábrán szerepel; a tervező a bizonylat bőszeles optimumát használja. A hátszél felé mutató VMG éppen ezen a szögon a legnagyobb, és tompább menetben nem ígér jobb VMG-t.</p>
       <p>10°-nál kisebb TWA-n — ez a holtszög — a hajó a modell szerint nem halad. 10° és az éles TWA között a sebesség úgy emelkedik, hogy a szél felé mutató VMG pontosan a bizonylat éles TWA-ján a legnagyobb, és ott a bizonylat éles VMG-jét adja. Éles menetben tehát a táblában megadott éles TWA-val és éles VMG-vel számol; más irányokban a tábla szögeivel.</p>
       <p>Ha a hajód nincs a listában, <a href="index.html#visszajelzes">saját polárt is beküldhetsz</a>. Addig a két tábla közül a hozzád közelebb állóval tervezz, és kezeld becslésnek.</p>
 
       <h3 id="aiolos-polar">Aiolos mintapolár – Elan 295 (HUN 295, ORC)</h3>
       <p>A tábla és az ábra a nyilvános <strong>ORC Club-bizonylatból</strong> való.</p>
       <p>A bizonylat 4–24 csomós szelekre ad adatot; a tábla, az ábra és a tervező is ezt a tartományt használja. Az oszlopok a valódi szélsebességet (TWS, csomó), a sorok a TWA-t mutatják; a cellák a hajósebességet csomóban. Az éles TWA, az éles VMG, a bőszeles TWA és a bőszeles VMG külön sor.</p>
-      <p>A tervező útvonalszámítása ezt a 2026-os bizonylatot használja, a 4 és a 24 csomós oszloppal együtt. Éles menetben a bizonylat éles TWA-jával és éles VMG-jével számol; 10° alatt nem halad, a kettő között a sebesség úgy nő, hogy a szél felé mutató VMG éppen az éles TWA-n legyen a legnagyobb. 150° után a tábla utolsó két pontjából lineárisan extrapolál.</p>
+      <p>A tervező útvonalszámítása ezt a 2026-os bizonylatot használja, a 4 és a 24 csomós oszloppal együtt. Éles menetben a bizonylat éles TWA-jával és éles VMG-jével számol; 10° alatt nem halad, a kettő között a sebesség úgy nő, hogy a szél felé mutató VMG éppen az éles TWA-n legyen a legnagyobb. Hátszélben a bizonylat bőszeles TWA-ját és bőszeles VMG-jét használja: a hátszél felé mutató VMG ezen a szögon a legnagyobb, és ennél tompább menetben nem ígér jobb VMG-t.</p>
       <div class="polar-wrap">
         <table class="polar-table">
           <caption>Aiolos – Elan 295 (HUN 295), ORC Club-bizonylat 006/26 (2026) — hajósebesség, kn</caption>
@@ -268,7 +268,7 @@
         <li>A táblabeli TWA-pontok között lineárisan interpolál.</li>
         <li>10° és az éles TWA között a sebesség úgy emelkedik, hogy a szél felé mutató VMG pontosan a bizonylat éles TWA-ján a legnagyobb.</li>
         <li>10°-nál kisebb TWA-n a hajó a modell szerint nem halad (0 csomó).</li>
-        <li>Az utolsó táblabeli TWA (150°) után, 180° felé, jelenleg a tábla utolsó két pontjából lineárisan extrapolál. A hátszeles, bőszeles extrapoláció még fejlesztés alatt van.</li>
+        <li>Ha a polárban van bőszeles TWA és bőszeles VMG (az Aiolos bizonylatán igen), a tervező ezt az optimumot használja: a hátszél felé mutató VMG éppen ott a legnagyobb, és 180° felé már nem ígér jobbat. Ha nincs ilyen adat (például az Elan 310-nél), 150° után a tábla utolsó két pontjából lineárisan extrapolál.</li>
       </ul>
 
       <h2>Hogyan működik az izokron módszer?</h2>
