@@ -38,6 +38,7 @@
     .card { background: #1e293b; border-radius: 12px; padding: 18px 18px 8px; margin-bottom: 12px; }
     .lead { font-size: 1.02rem; line-height: 1.55; color: #e2e8f0; margin-bottom: 14px; }
     article h2 { font-size: 1.15rem; font-weight: 650; margin: 8px 0 10px; color: #f8fafc; }
+    article h3 { font-size: 1.02rem; font-weight: 650; margin: 18px 0 10px; color: #f1f5f9; }
     article p, article li { font-size: 0.95rem; line-height: 1.6; color: #cbd5e1; }
     article p { margin: 0 0 12px; }
     article ul { margin: 0 0 14px 1.2em; }
@@ -122,84 +123,26 @@
 
       <h2>Mi az a polár?</h2>
       <p>A polár megmondja, hogy egy adott szélben, adott TWA-n (true wind angle, valódi szélhez mért szög) milyen gyorsan megy a hajó. Ebből a tervező tudja, mikor éri meg élesebben vagy tompábban menni, és mikor érdemes fordulni vagy halzolni.</p>
-      <p>Jelenleg két hajó van a listában (az Aiolos értékei a 2026-os ORC Club-bizonyítványból valók, táblázatban és ábrán a <a href="#aiolos-polar">saját polár beküldése előtt</a> láthatók):</p>
+      <p>Jelenleg két hajó van a listában (az Aiolos értékei a 2026-os ORC Club-bizonylatból valók; a <a href="#aiolos-polar">táblázat és az ábra</a> alább, ebben a szakaszban látható):</p>
       <ul>
         <li><strong>Elan 310</strong></li>
         <li><strong>Aiolos – Elan 295 (HUN 295, ORC)</strong></li>
       </ul>
-      <p>A két hajó polárja eltérő. Az Elan 310 táblája 6 és 20 csomó közötti szelekre, több TWA-ra (52°–150°) tartalmaz sebességet, és külön éles TWA-t (kb. 39–44°, szél függvényében). Az Aiolos a 2026-os ORC Club-bizonyítvány (006/26, 04890004NPW) szerint 4–24 csomóra van megadva, éles TWA-val és éles VMG-vel, valamint bőszeles TWA-val és bőszeles VMG-vel; a tervező ezt a 4–24 csomós táblát használja. A bőszeles TWA és a bőszeles VMG a táblában és az ábrán szerepel, a számítás ezeket egyelőre nem veszi figyelembe.</p>
-      <p>10°-nál kisebb TWA-n — ez a holtszög — a hajó a modell szerint nem halad. A 10° és az éles TWA között a sebesség úgy emelkedik, hogy a szél felé mutató VMG pontosan a bizonyítvány éles TWA-ján a legnagyobb, és ott a bizonyítvány éles VMG-jét adja. Élesben tehát a táblában megadott éles TWA-val és éles VMG-vel számol; más irányokban a tábla szögeivel.</p>
+      <p>A két hajó polárja eltérő. Az Elan 310 táblája 6 és 20 csomó közötti szelekre, több TWA-ra (52°–150°) tartalmaz sebességet, és külön éles TWA-t (kb. 39–44°, szél függvényében). Az Aiolos a 2026-os ORC Club-bizonylat (006/26, 04890004NPW) szerint 4–24 csomóra van megadva, éles TWA-val és éles VMG-vel, valamint bőszeles TWA-val és bőszeles VMG-vel; a tervező ezt a 4–24 csomós táblát használja. A bőszeles TWA és a bőszeles VMG a táblában és az ábrán szerepel, a számítás ezeket egyelőre nem veszi figyelembe.</p>
+      <p>10°-nál kisebb TWA-n — ez a holtszög — a hajó a modell szerint nem halad. A 10° és az éles TWA között a sebesség úgy emelkedik, hogy a szél felé mutató VMG pontosan a bizonylat éles TWA-ján a legnagyobb, és ott a bizonylat éles VMG-jét adja. Élesben tehát a táblában megadott éles TWA-val és éles VMG-vel számol; más irányokban a tábla szögeivel.</p>
       <p>Ha a hajód nincs a listában, <a href="index.html#visszajelzes">saját polárt is beküldhetsz</a>. Addig a két tábla közül a hozzád közelebb állóval tervezz, és kezeld becslésnek.</p>
 
-      <h2 id="nincs-adat">Hol nincs táblabeli adat?</h2>
-      <p>A polár csak bizonyos szelekre és TWA-kra ad kész számot. Ahol nincs táblabeli pont, a tervező így számol:</p>
-      <ul>
-        <li>A széloszlopok között (például 9 csomó, vagy az Aiolosnál 22 csomó a 20 és 24 csomós oszlop között) a szomszédos oszlopok között lineárisan interpolál.</li>
-        <li>A polár saját legalacsonyabb széloszlopa alatt a sebességet arányosan csökkenti; a szögek a legalsó oszlopéi maradnak.</li>
-        <li>A polár saját legmagasabb széloszlopa felett — mindig a tábla utolsó oszlopát, legyen az 24 csomó (Aiolos), 20 (Elan 310), vagy kevesebb egy saját polárnál — ezt az oszlopot használja; nem extrapolál és nem gyorsít tovább.</li>
-        <li>A táblabeli TWA-pontok között lineárisan interpolál.</li>
-        <li>10° és az éles TWA között a sebesség úgy emelkedik, hogy a szél felé mutató VMG pontosan a bizonyítvány éles TWA-ján a legnagyobb.</li>
-        <li>10°-nál kisebb TWA-n a hajó a modell szerint nem halad (0 csomó).</li>
-        <li>Az utolsó táblabeli TWA (150°) után, 180° felé, jelenleg a tábla utolsó két pontjából lineárisan extrapolál. A hátszeles, bőszeles extrapoláció még fejlesztés alatt van.</li>
-      </ul>
-
-      <h2>Hogyan működik az izokron módszer?</h2>
-      <p>Nem egyetlen „egyenes vonalat” húz a térképen, hanem időről időre azt nézi: <em>innen, ebből a szélből, merre jutok el a következő lépésben?</em></p>
-      <ul>
-        <li>Az indulópontból sok irányba kiszámolja, meddig jut a hajó egy rövid időlépésben. A lépés általában hat perc körüli, de gyenge szélben vagy a Tihanyi-szorosban rövidebb, hogy a tervező ne „ragadjon be”, és a szűk vízen pontosabb legyen.</li>
-        <li>A vízben maradó, leghamarabb elért pontokból új frontot — izokront — képez: ez az a görbe, ameddig adott idő alatt el lehet jutni.</li>
-        <li>Ezt ismétli, mindig a leggyorsabb határt viszi tovább. A szárazföldre, a tilos vagy sekély sávra eső lépéseket eldobja.</li>
-        <li>Ha a cél közelébe ér (kb. 0,35 tengeri mérföld), az utolsó szakaszt még hozzáadja, és <strong>visszafelé</strong> összeköti a pontokat: ez lesz a javasolt útvonal.</li>
-      </ul>
-      <p>A Tihanyi-szoroson a tervező a kitűzött hajóutat (a kardinálisok közötti „csövet”) külön is figyelembe veszi, hogy ne vágjon át a félszigeten vagy a Zamárdi homokpadon.</p>
-      <div class="diagram">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" role="img" aria-label="Izokron frontok a rajttól a célig">
-          <rect width="640" height="280" fill="#f8fafc"/>
-          <text x="20" y="28" font-family="system-ui,sans-serif" font-size="16" fill="#0f172a">Az izokron: egyre távolabbi időfrontok</text>
-          <ellipse cx="140" cy="160" rx="50" ry="36" fill="none" stroke="#93c5fd" stroke-width="2"/>
-          <ellipse cx="200" cy="150" rx="90" ry="58" fill="none" stroke="#60a5fa" stroke-width="2"/>
-          <ellipse cx="280" cy="145" rx="130" ry="78" fill="none" stroke="#3b82f6" stroke-width="2"/>
-          <ellipse cx="380" cy="140" rx="160" ry="92" fill="none" stroke="#1d4ed8" stroke-width="2"/>
-          <polyline points="140,160 210,138 300,128 400,122 520,118" fill="none" stroke="#0f172a" stroke-width="3"/>
-          <circle cx="140" cy="160" r="7" fill="#22c55e"/>
-          <circle cx="520" cy="118" r="7" fill="#ef4444"/>
-          <text x="118" y="190" font-family="system-ui,sans-serif" font-size="13" fill="#166534">rajt</text>
-          <text x="500" y="108" font-family="system-ui,sans-serif" font-size="13" fill="#991b1b">cél</text>
-          <text x="170" y="250" font-family="system-ui,sans-serif" font-size="13" fill="#334155">minden gyűrű egy későbbi időpont: merre lehet addig eljutni</text>
-          <text x="170" y="268" font-family="system-ui,sans-serif" font-size="13" fill="#334155">a sötét vonal a leggyorsabb ág, visszafelé összekötve</text>
-        </svg>
-      </div>
-
-      <h2>Van-e fordulási büntetés?</h2>
-      <p><strong>Nincs.</strong> A tervező nem ad hozzá plusz időt egy-egy fordulóhoz vagy halzoláshoz. Azt a polár és a holtszög már implicit tartalmazza, hogy élesebben lassabban megy a hajó, de a manőver idejét külön nem modellezi. Éles szélben ezért a számított idő egy kicsit derűlátó lehet.</p>
-
-      <h2>A déli sekély sáv és a part</h2>
-      <p>A tervező nem megy át a szárazföldön, és a Tihanyi-félszigetet külön is tiltott területként kezeli. A déli part mentén figyelembe veszi a <strong>marásvonal</strong> / déli sekély pad sávját (KDTVIZIG-alapú sáv, Szántódnál szakadással), valamint a szoros délkeleti oldalán a Zamárdi–Szántód homokpadot. A tihanyi átjárásra a kardinálisok közötti hajóutat használja.</p>
-      <p>Ez nem teljes medertérkép. Nem ismer minden akadályt, mélységváltozást, kikötői és fürdőzónát, mesterséges ívóhelyet vagy munkaterületet. A hivatalos pályajelek, kardinálisok és a Hajósoknak szóló hirdetmények a mérvadók.</p>
-
-      <h2>Mennyi ideig számol?</h2>
-      <p>A tervező időhorizontja <strong>legfeljebb 36 óra</strong>, vagy rövidebb, ha az adott modell előrejelzése hamarabb véget ér. Az ICON-D2-t kb. 48 órára kéri le; jó szélben egy Balaton-kerülő jellemzően 15–25 óra, tehát a rövid távú modell is elviheti a teljes kört. Hosszú, lassú futamon (például nagyon gyenge szélben, Keszthely–Almádi 1,5 csomó körül) a 36 óra kevés lehet: ha a hajó ennyi idő alatt nem ér célba, a tervező a célhoz addig legközelebbi pontig ad részleges útvonalat, és jelzi a hátralévő távot. Ha több modellt jelölsz ki, mindegyikre külön útvonal készül a saját horizontjáig; a tervező egy útvonalon belül nem vált át automatikusan egy másik modellre.</p>
-
-      <h2>Kezdőpont, versenypontok, megosztás és GPX</h2>
-      <p>A kezdőpontot a listából, a <strong>Jelenlegi pozíció</strong> gombbal vagy a térképre koppintva (vagy hosszan nyomva) is beállíthatod. A <strong>Verseny</strong> listából a hivatalosan közölt pályajelek kerülnek a térképre és a Start/Cél listába; ahol a versenyutasítás nem ad GPS-t, ott ezt jelezzük, és nem találunk ki koordinátát. A saját, elnevezett pontok a böngészőben, helyben menthetők.</p>
-      <p>A tervező jelenleg egy szakaszt számol, A-ból B-be. A többbójás pálya (például Kékszalag: Füred–Kenese–Siófok–Keszthely–Füred) későbbi fejlesztés.</p>
-      <p>A <strong>Megosztás</strong> a kiszámolt útvonalat viszi a linkben: a vonal pontjait, az érkezést és azt, hogy mikori előrejelzésből számoltuk. Megnyitáskor a címzett azonnal látja ugyanazt a vonalat, számolás nélkül. Mellé kerül egy „Számold újra friss széllel” gomb; ez nem kötelező. Újraszámolás után a megszokott élő tervezés folytatódik, és a következő megosztás már az új útvonalat adja.</p>
-      <p>A <strong>GPX letöltése</strong> szabványos GPX 1.1-es fájlt ad, útvonallal és nyomvonallal, időbélyegekkel. A nagyobb irányváltások „Pont 1, 2…” néven szerepelnek — ezek nem feltétlenül versenyfordulók, csak a vonal töréspontjai. A fájl chartplotterbe, OpenCPN-be vagy Navionicsba tölthető.</p>
-
-      <h2>Korlátok és felelősség</h2>
-      <p>A tervező tájékoztató jellegű hobbieszköz. Az útvonal tévedhet. Nem helyettesíti a körültekintő hajózást, a saját ítélőképességet, és <strong>nem helyettesíti a hivatalos előrejelzéseket és figyelmeztetéseket, például a viharjelző fényeket</strong>. A használat saját felelősségre történik; a készítő nem vállal felelősséget kárért, például zátonyra futásért.</p>
-
-      <h2 id="aiolos-polar">Aiolos mintapolár – Elan 295 (HUN 295, ORC)</h2>
-      <p>A tábla és az ábra a nyilvános <strong>ORC Club-bizonyítványból</strong> való: Aiolos, HUN 295, Elan 295, bizonyítvány <strong>006/26 (2026)</strong>, ORC hivatkozás <strong>04890004NPW</strong>, kiadva 2026. április 29-én, érvényes 2026. december 31-ig, VPP 2026 1.00. A bizonyítvány: <a href="https://sas.orc.org/sasapi/cc/04890004NPW" target="_blank" rel="noopener">sas.orc.org/sasapi/cc/04890004NPW</a> (a megnyitásnál az ORC ember-ellenőrzést kérhet).</p>
-      <p>A bizonyítvány 4–24 csomós szelekre ad adatot; a tábla, az ábra és a tervező is ezt a tartományt használja. Az oszlopok a valódi szélsebességet (TWS, csomó), a sorok a TWA-t mutatják; a cellák a hajósebességet csomóban. Az éles TWA, az éles VMG, a bőszeles TWA és a bőszeles VMG külön sor. A bőszeles értékek a táblában és az ábrán látszanak, a számítás jelenleg még nem használja őket.</p>
-      <p>A tervező útvonalszámítása ezt a 2026-os bizonyítványt használja, a 4 és a 24 csomós oszloppal együtt. Élesben a bizonyítvány éles TWA-jával és éles VMG-jével számol; 10° alatt nem halad, a kettő között a sebesség úgy nő, hogy a legjobb szél felé mutató VMG éppen az éles TWA-n legyen. 150° után a tábla utolsó két pontjából lineárisan extrapolál. (Az Elan 310 polárja 6–20 csomós, bőszeles TWA és bőszeles VMG nélkül; a 10°-os holtszög és az éles VMG-csúcs ott is ugyanígy működik.)</p>
+      <h3 id="aiolos-polar">Aiolos mintapolár – Elan 295 (HUN 295, ORC)</h3>
+      <p>A tábla és az ábra a nyilvános <strong>ORC Club-bizonylatból</strong> való: Aiolos, HUN 295, Elan 295, bizonylat <strong>006/26 (2026)</strong>, ORC hivatkozás <strong>04890004NPW</strong>, kiadva 2026. április 29-én, érvényes 2026. december 31-ig, VPP 2026 1.00. A bizonylat: <a href="https://sas.orc.org/sasapi/cc/04890004NPW" target="_blank" rel="noopener">sas.orc.org/sasapi/cc/04890004NPW</a> (a megnyitásnál az ORC ember-ellenőrzést kérhet).</p>
+      <p>A bizonylat 4–24 csomós szelekre ad adatot; a tábla, az ábra és a tervező is ezt a tartományt használja. Az oszlopok a valódi szélsebességet (TWS, csomó), a sorok a TWA-t mutatják; a cellák a hajósebességet csomóban. Az éles TWA, az éles VMG, a bőszeles TWA és a bőszeles VMG külön sor. A bőszeles értékek a táblában és az ábrán látszanak, a számítás jelenleg még nem használja őket.</p>
+      <p>A tervező útvonalszámítása ezt a 2026-os bizonylatot használja, a 4 és a 24 csomós oszloppal együtt. Élesben a bizonylat éles TWA-jával és éles VMG-jével számol; 10° alatt nem halad, a kettő között a sebesség úgy nő, hogy a legjobb szél felé mutató VMG éppen az éles TWA-n legyen. 150° után a tábla utolsó két pontjából lineárisan extrapolál. (Az Elan 310 polárja 6–20 csomós, bőszeles TWA és bőszeles VMG nélkül; a 10°-os holtszög és az éles VMG-csúcs ott is ugyanígy működik.)</p>
       <div class="polar-wrap">
         <table class="polar-table">
-          <caption>Aiolos – Elan 295 (HUN 295), ORC Club-bizonyítvány 006/26 (2026) — hajósebesség, kn</caption>
+          <caption>Aiolos – Elan 295 (HUN 295), ORC Club-bizonylat 006/26 (2026) — hajósebesség, kn</caption>
           <tr><th scope="col">TWA</th><th scope="col">4 kn</th><th scope="col">6 kn</th><th scope="col">8 kn</th><th scope="col">10 kn</th><th scope="col">12 kn</th><th scope="col">14 kn</th><th scope="col">16 kn</th><th scope="col">20 kn</th><th scope="col">24 kn</th></tr><tr class="beat"><th scope="row">Éles TWA</th><td>46.1°</td><td>43.4°</td><td>41.2°</td><td>39.7°</td><td>38.7°</td><td>38.3°</td><td>38.2°</td><td>38.6°</td><td>40.1°</td></tr><tr class="beat"><th scope="row">Éles VMG (kn)</th><td>2.15</td><td>3.10</td><td>3.79</td><td>4.27</td><td>4.54</td><td>4.64</td><td>4.68</td><td>4.69</td><td>4.58</td></tr><tr><th scope="row">52°</th><td>3.38</td><td>4.72</td><td>5.63</td><td>6.18</td><td>6.45</td><td>6.57</td><td>6.62</td><td>6.67</td><td>6.64</td></tr><tr><th scope="row">60°</th><td>3.62</td><td>4.98</td><td>5.87</td><td>6.37</td><td>6.63</td><td>6.76</td><td>6.82</td><td>6.87</td><td>6.87</td></tr><tr><th scope="row">75°</th><td>3.79</td><td>5.13</td><td>6.04</td><td>6.52</td><td>6.80</td><td>6.98</td><td>7.10</td><td>7.21</td><td>7.24</td></tr><tr><th scope="row">90°</th><td>3.87</td><td>5.38</td><td>6.28</td><td>6.66</td><td>6.85</td><td>7.08</td><td>7.28</td><td>7.55</td><td>7.67</td></tr><tr><th scope="row">110°</th><td>3.93</td><td>5.48</td><td>6.45</td><td>6.91</td><td>7.19</td><td>7.39</td><td>7.56</td><td>7.86</td><td>8.12</td></tr><tr><th scope="row">120°</th><td>3.79</td><td>5.29</td><td>6.33</td><td>6.87</td><td>7.24</td><td>7.57</td><td>7.85</td><td>8.27</td><td>8.64</td></tr><tr><th scope="row">135°</th><td>3.30</td><td>4.71</td><td>5.82</td><td>6.61</td><td>7.05</td><td>7.44</td><td>7.86</td><td>8.79</td><td>9.82</td></tr><tr><th scope="row">150°</th><td>2.71</td><td>3.97</td><td>5.06</td><td>6.01</td><td>6.68</td><td>7.08</td><td>7.45</td><td>8.30</td><td>9.50</td></tr><tr class="run"><th scope="row">Bőszeles TWA</th><td>136.3°</td><td>145.8°</td><td>150.5°</td><td>152.0°</td><td>160.0°</td><td>168.5°</td><td>175.4°</td><td>175.7°</td><td>164.9°</td></tr><tr class="run"><th scope="row">Bőszeles VMG (kn)</th><td>2.35</td><td>3.44</td><td>4.38</td><td>5.21</td><td>5.95</td><td>6.48</td><td>6.87</td><td>7.56</td><td>8.37</td></tr></table>
       </div>
       <div class="diagram">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 540" role="img" aria-label="Aiolos – Elan 295 (HUN 295, ORC) polárdiagram, hajósebesség csomóban a TWA függvényében, a 2026-os Club-bizonyítvány szerint">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 540" role="img" aria-label="Aiolos – Elan 295 (HUN 295, ORC) polárdiagram, hajósebesség csomóban a TWA függvényében, a 2026-os Club-bizonylat szerint">
   <rect width="640" height="540" fill="#f8fafc"/>
   <text x="20" y="26" font-family="system-ui,sans-serif" font-size="16" font-weight="600" fill="#0f172a">Aiolos – Elan 295 (HUN 295), ORC Club 006/26 (2026)</text>
   <text x="20" y="44" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Hajósebesség (kn) a TWA (valódi szélhez mért szög) szerint. A szél felülről fúj; a két oldal a két tack.</text>
@@ -314,6 +257,64 @@
 </svg>
       </div>
       <p class="caption">A polárdiagram a fenti tábla értékeit rajzolja ki, mindkét tackre tükrözve. A szél felülről fúj. A teli pontok az éles TWA, az üres körök a bőszeles TWA.</p>
+
+      <h3 id="nincs-adat">Hol nincs táblabeli adat?</h3>
+      <p>A polár csak bizonyos szelekre és TWA-kra ad kész számot. Ahol nincs táblabeli pont, a tervező így számol:</p>
+      <ul>
+        <li>A széloszlopok között (például 9 csomó, vagy az Aiolosnál 22 csomó a 20 és 24 csomós oszlop között) a szomszédos oszlopok között lineárisan interpolál.</li>
+        <li>A polár saját legalacsonyabb széloszlopa alatt a sebességet arányosan csökkenti; a szögek a legalsó oszlopéi maradnak.</li>
+        <li>A polár saját legmagasabb széloszlopa felett — mindig a tábla utolsó oszlopát, legyen az 24 csomó (Aiolos), 20 (Elan 310), vagy kevesebb egy saját polárnál — ezt az oszlopot használja; nem extrapolál és nem gyorsít tovább.</li>
+        <li>A táblabeli TWA-pontok között lineárisan interpolál.</li>
+        <li>10° és az éles TWA között a sebesség úgy emelkedik, hogy a szél felé mutató VMG pontosan a bizonylat éles TWA-ján a legnagyobb.</li>
+        <li>10°-nál kisebb TWA-n a hajó a modell szerint nem halad (0 csomó).</li>
+        <li>Az utolsó táblabeli TWA (150°) után, 180° felé, jelenleg a tábla utolsó két pontjából lineárisan extrapolál. A hátszeles, bőszeles extrapoláció még fejlesztés alatt van.</li>
+      </ul>
+
+      <h2>Hogyan működik az izokron módszer?</h2>
+      <p>Nem egyetlen „egyenes vonalat” húz a térképen, hanem időről időre azt nézi: <em>innen, ebből a szélből, merre jutok el a következő lépésben?</em></p>
+      <ul>
+        <li>Az indulópontból sok irányba kiszámolja, meddig jut a hajó egy rövid időlépésben. A lépés általában hat perc körüli, de gyenge szélben vagy a Tihanyi-szorosban rövidebb, hogy a tervező ne „ragadjon be”, és a szűk vízen pontosabb legyen.</li>
+        <li>A vízben maradó, leghamarabb elért pontokból új frontot — izokront — képez: ez az a görbe, ameddig adott idő alatt el lehet jutni.</li>
+        <li>Ezt ismétli, mindig a leggyorsabb határt viszi tovább. A szárazföldre, a tilos vagy sekély sávra eső lépéseket eldobja.</li>
+        <li>Ha a cél közelébe ér (kb. 0,35 tengeri mérföld), az utolsó szakaszt még hozzáadja, és <strong>visszafelé</strong> összeköti a pontokat: ez lesz a javasolt útvonal.</li>
+      </ul>
+      <p>A Tihanyi-szoroson a tervező a kitűzött hajóutat (a kardinálisok közötti „csövet”) külön is figyelembe veszi, hogy ne vágjon át a félszigeten vagy a Zamárdi homokpadon.</p>
+      <div class="diagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" role="img" aria-label="Izokron frontok a rajttól a célig">
+          <rect width="640" height="280" fill="#f8fafc"/>
+          <text x="20" y="28" font-family="system-ui,sans-serif" font-size="16" fill="#0f172a">Az izokron: egyre távolabbi időfrontok</text>
+          <ellipse cx="140" cy="160" rx="50" ry="36" fill="none" stroke="#93c5fd" stroke-width="2"/>
+          <ellipse cx="200" cy="150" rx="90" ry="58" fill="none" stroke="#60a5fa" stroke-width="2"/>
+          <ellipse cx="280" cy="145" rx="130" ry="78" fill="none" stroke="#3b82f6" stroke-width="2"/>
+          <ellipse cx="380" cy="140" rx="160" ry="92" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+          <polyline points="140,160 210,138 300,128 400,122 520,118" fill="none" stroke="#0f172a" stroke-width="3"/>
+          <circle cx="140" cy="160" r="7" fill="#22c55e"/>
+          <circle cx="520" cy="118" r="7" fill="#ef4444"/>
+          <text x="118" y="190" font-family="system-ui,sans-serif" font-size="13" fill="#166534">rajt</text>
+          <text x="500" y="108" font-family="system-ui,sans-serif" font-size="13" fill="#991b1b">cél</text>
+          <text x="170" y="250" font-family="system-ui,sans-serif" font-size="13" fill="#334155">minden gyűrű egy későbbi időpont: merre lehet addig eljutni</text>
+          <text x="170" y="268" font-family="system-ui,sans-serif" font-size="13" fill="#334155">a sötét vonal a leggyorsabb ág, visszafelé összekötve</text>
+        </svg>
+      </div>
+
+      <h2>Van-e fordulási büntetés?</h2>
+      <p><strong>Nincs.</strong> A tervező nem ad hozzá plusz időt egy-egy fordulóhoz vagy halzoláshoz. Azt a polár és a holtszög már implicit tartalmazza, hogy élesebben lassabban megy a hajó, de a manőver idejét külön nem modellezi. Éles szélben ezért a számított idő egy kicsit derűlátó lehet.</p>
+
+      <h2>A déli sekély sáv és a part</h2>
+      <p>A tervező nem megy át a szárazföldön, és a Tihanyi-félszigetet külön is tiltott területként kezeli. A déli part mentén figyelembe veszi a <strong>marásvonal</strong> / déli sekély pad sávját (KDTVIZIG-alapú sáv, Szántódnál szakadással), valamint a szoros délkeleti oldalán a Zamárdi–Szántód homokpadot. A tihanyi átjárásra a kardinálisok közötti hajóutat használja.</p>
+      <p>Ez nem teljes medertérkép. Nem ismer minden akadályt, mélységváltozást, kikötői és fürdőzónát, mesterséges ívóhelyet vagy munkaterületet. A hivatalos pályajelek, kardinálisok és a Hajósoknak szóló hirdetmények a mérvadók.</p>
+
+      <h2>Mennyi ideig számol?</h2>
+      <p>A tervező időhorizontja <strong>legfeljebb 36 óra</strong>, vagy rövidebb, ha az adott modell előrejelzése hamarabb véget ér. Az ICON-D2-t kb. 48 órára kéri le; jó szélben egy Balaton-kerülő jellemzően 15–25 óra, tehát a rövid távú modell is elviheti a teljes kört. Hosszú, lassú futamon (például nagyon gyenge szélben, Keszthely–Almádi 1,5 csomó körül) a 36 óra kevés lehet: ha a hajó ennyi idő alatt nem ér célba, a tervező a célhoz addig legközelebbi pontig ad részleges útvonalat, és jelzi a hátralévő távot. Ha több modellt jelölsz ki, mindegyikre külön útvonal készül a saját horizontjáig; a tervező egy útvonalon belül nem vált át automatikusan egy másik modellre.</p>
+
+      <h2>Kezdőpont, versenypontok, megosztás és GPX</h2>
+      <p>A kezdőpontot a listából, a <strong>Jelenlegi pozíció</strong> gombbal vagy a térképre koppintva (vagy hosszan nyomva) is beállíthatod. A <strong>Verseny</strong> listából a hivatalosan közölt pályajelek kerülnek a térképre és a Start/Cél listába; ahol a versenyutasítás nem ad GPS-t, ott ezt jelezzük, és nem találunk ki koordinátát. A saját, elnevezett pontok a böngészőben, helyben menthetők.</p>
+      <p>A tervező jelenleg egy szakaszt számol, A-ból B-be. A többbójás pálya (például Kékszalag: Füred–Kenese–Siófok–Keszthely–Füred) későbbi fejlesztés.</p>
+      <p>A <strong>Megosztás</strong> a kiszámolt útvonalat viszi a linkben: a vonal pontjait, az érkezést és azt, hogy mikori előrejelzésből számoltuk. Megnyitáskor a címzett azonnal látja ugyanazt a vonalat, számolás nélkül. Mellé kerül egy „Számold újra friss széllel” gomb; ez nem kötelező. Újraszámolás után a megszokott élő tervezés folytatódik, és a következő megosztás már az új útvonalat adja.</p>
+      <p>A <strong>GPX letöltése</strong> szabványos GPX 1.1-es fájlt ad, útvonallal és nyomvonallal, időbélyegekkel. A nagyobb irányváltások „Pont 1, 2…” néven szerepelnek — ezek nem feltétlenül versenyfordulók, csak a vonal töréspontjai. A fájl chartplotterbe, OpenCPN-be vagy Navionicsba tölthető.</p>
+
+      <h2>Korlátok és felelősség</h2>
+      <p>A tervező tájékoztató jellegű hobbieszköz. Az útvonal tévedhet. Nem helyettesíti a körültekintő hajózást, a saját ítélőképességet, és <strong>nem helyettesíti a hivatalos előrejelzéseket és figyelmeztetéseket, például a viharjelző fényeket</strong>. A használat saját felelősségre történik; a készítő nem vállal felelősséget kárért, például zátonyra futásért.</p>
 
       <h2 id="sajat-polar">Visszajelzés és saját polár</h2>
       <p>Saját polárt a tervezőből küldhetsz be, GitHub-fiók nélkül: a hajóválasztónál a „Saját polárt is beküldhetsz” link, vagy a lábléc Visszajelzés linkje nyitja az űrlapot. A beküldést egy háttérszolgáltatás rögzíti, Turnstile-lel és korlátozott gyakorisággal védve. Polárhoz CSV-sablon van, és külön kell engedélyt adni a hajónév közzétételére.</p>
