@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <base href="/br-preview/">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <title>Fejlesztések – Balaton Routing</title>
+  <link rel="icon" type="image/png" href="icon.png" sizes="512x512">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="canonical" href="https://balatonrouting.hu/fejlesztesek.html">
+  <meta name="description" content="A Balaton Routing tervezett és elkészült fejlesztései röviden: pályatervezés, polár, szél és a már elérhető funkciók.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://balatonrouting.hu/fejlesztesek.html">
+  <meta property="og:title" content="Fejlesztések – Balaton Routing">
+  <meta property="og:description" content="Tervezett és elkészült fejlesztések röviden, vitorlázóknak.">
+  <meta property="og:locale" content="hu_HU">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; }
+    .header { background: #1e293b; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; gap: 10px; }
+    .header-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .header-logo { width: 36px; height: 36px; border-radius: 18%; flex-shrink: 0; display: block; }
+    .header h1 { font-size: 1.05rem; font-weight: 600; line-height: 1.15; }
+    .header h1 a { color: inherit; text-decoration: none; }
+    .header-sub { margin: 1px 0 0; font-size: 0.72rem; font-weight: 400; color: #94a3b8; line-height: 1.25; }
+    .header-nb { display: block; margin-top: 3px; font-size: 0.62rem; font-weight: 400; color: #64748b; text-decoration: none; letter-spacing: 0.01em; line-height: 1.2; }
+    .header-nb:hover { color: #94a3b8; text-decoration: underline; }
+    .header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; margin-left: auto; }
+    a.btn-donate {
+      display: inline-block; width: auto; padding: 6px 11px; margin: 0;
+      border-radius: 999px; background: #fbbf24; color: #0f172a;
+      font-size: 0.78rem; font-weight: 600; text-decoration: none; white-space: nowrap; line-height: 1.2;
+    }
+    a.btn-donate:hover { background: #f59e0b; }
+    .container { padding: 12px; max-width: 760px; margin: 0 auto; padding-bottom: 40px; }
+    .card { background: #1e293b; border-radius: 12px; padding: 18px 18px 8px; margin-bottom: 12px; }
+    .lead { font-size: 1.02rem; line-height: 1.55; color: #e2e8f0; margin-bottom: 14px; }
+    article h2 { font-size: 1.15rem; font-weight: 650; margin: 8px 0 10px; color: #f8fafc; }
+    article h3 { font-size: 1.02rem; font-weight: 650; margin: 18px 0 10px; color: #f1f5f9; }
+    article p, article li { font-size: 0.95rem; line-height: 1.6; color: #cbd5e1; }
+    article p { margin: 0 0 12px; }
+    article ul { margin: 0 0 14px 1.2em; }
+    article li { margin: 0 0 6px; }
+    article strong { color: #f8fafc; font-weight: 650; }
+    .site-footer {
+      max-width: 760px; margin: 0 auto; padding: 8px 16px 28px;
+      font-size: 0.8rem; line-height: 1.5; color: #94a3b8;
+    }
+    .site-footer p { margin: 0 0 8px; }
+    .site-footer a { color: #fbbf24; font-weight: 600; text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+    .site-footer .credit { color: #64748b; font-size: 0.75rem; }
+    .site-footer .impresszum { color: #64748b; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-brand">
+      <a href="index.html"><img class="header-logo" src="icon.png" width="36" height="36" alt="Balaton Routing"></a>
+      <div>
+        <h1><a href="index.html">Balaton Routing</a></h1>
+        <p class="header-sub">Tervezett és elkészült fejlesztések</p>
+        <a class="header-nb" href="https://nbsailing.hu" target="_blank" rel="noopener">NB Sailing projekt</a>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="btn-donate" href="https://ko-fi.com/balatonrouting" target="_blank" rel="noopener">☕ Támogatás</a>
+    </div>
+  </div>
+  <div class="container">
+    <article class="card">
+      <p class="lead">A folyamatban lévő tervek és a már elkészült fejlesztések röviden.</p>
+
+      <h2>Tervezett fejlesztések</h2>
+      <ul>
+        <li>Pályatervezés több fordulóbójával (rajt → bóják → cél, szakaszidőkkel).</li>
+        <li>Bőszeles (hátszeles) szakasz: a polár bőszeles TWA és VMG értékeinek felhasználása.</li>
+        <li>HungaroMet MEANDER rövid távú előrejelzés az első két órára.</li>
+        <li>Kereshető polárlista hajótípus és név szerint (beküldött polárokkal).</li>
+      </ul>
+
+      <h2>Elkészült fejlesztések</h2>
+      <h3>2026. november</h3>
+      <ul>
+        <li>Visszajelző űrlap: hibajelentés, javaslat és saját polár beküldése GitHub-fiók nélkül.</li>
+        <li>Adatkezelési tájékoztató.</li>
+        <li>„Hogyan működik?” oldal a számítás rövid leírásával.</li>
+        <li>Versenybóják a térképen (Kékszalag, Ezüstszalag, Szóló és más hivatalos pályák).</li>
+        <li>Saját, elnevezett pontok mentése a böngészőben, ezen a készüléken.</li>
+        <li>Az Aiolos 2026-os ORC Club-bizonylat szerinti polárja, az Elan 310 mellett.</li>
+        <li>10°-os holtszög és éles VMG-csúcs az ORC bizonylat szerint.</li>
+        <li>A tábla legmagasabb széloszlopánál erősebb szélben is azt az oszlopot használja, nem gyorsít tovább.</li>
+        <li>Megosztható útvonal-link, amelyet friss széllel újra is lehet számolni.</li>
+        <li>GPX-letöltés chartplotterbe, OpenCPN-be vagy Navionicsba.</li>
+        <li>Sütimentes látogatottságszámlálás, kikapcsolható.</li>
+        <li>Élő HungaroMet szélmérés a balatoni állomásokról.</li>
+      </ul>
+      <h3>2026. szeptember</h3>
+      <ul>
+        <li>Izokron útvonaltervezés Open-Meteo előrejelzéssel és hajópolárral.</li>
+      </ul>
+    </article>
+  </div>
+  <footer class="site-footer">
+    <p class="footer-links">
+      <a href="index.html">← Vissza a tervezőhöz</a>
+      ·
+      <a href="howto.html">📖 Hogyan működik?</a>
+      ·
+      <a href="adatkezeles.html">Adatkezelés</a>
+    </p>
+    <p>A tervező tájékoztató jellegű hobbieszköz. Nem helyettesíti a körültekintő hajózást és a hivatalos viharjelző fényeket. Mindenki saját felelősségére használja.</p>
+    <p class="credit">Logó: tóvonal © az OpenStreetMap közreműködői</p>
+    <p class="impresszum">Készítette: Nagy Benedek · <a href="mailto:info@nbsailing.hu">info@nbsailing.hu</a> · <a href="https://nbsailing.hu" target="_blank" rel="noopener">nbsailing.hu</a></p>
+  </footer>
+</body>
+</html>
