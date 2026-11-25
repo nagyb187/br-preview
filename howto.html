@@ -103,7 +103,7 @@
         <li>GFS (hosszabb táv, kb. 10 nap)</li>
       </ul>
       <p>A <strong>met.hu-keverés</strong> csúszkájával azt állíthatod be, hogy az indulás után hány órán át, milyen arányban keveredjen a friss mérés a modellel. Az alapérték 2,0 óra (0 és 2 óra között, negyedórás lépésekben). Az induláskor még teljesen a mérés számít, aztán súlya egyenletesen csökken, és a beállított idő végére már csak a modell marad. Ha a csúszka nullán van, rögtön csak a modell számít.</p>
-      <p>Ha sem mérés, sem előrejelzés nincs, a program tartalékértéket (délnyugati 6 csomós szél) használna. Ezért a tervező nem számol tovább, mint ameddig az előrejelzés tart.</p>
+      <p>A tervező nem számol tovább, mint ameddig az előrejelzés tart.</p>
       <div class="diagram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" role="img" aria-label="A met.hu mérés és a modell keverése az időben">
           <rect width="640" height="200" fill="#f8fafc"/>
@@ -133,9 +133,9 @@
       <p>Ha a hajód nincs a listában, <a href="index.html#visszajelzes">saját polárt is beküldhetsz</a>. Addig a két tábla közül a hozzád közelebb állóval tervezz, és kezeld becslésnek.</p>
 
       <h3 id="aiolos-polar">Aiolos mintapolár – Elan 295 (HUN 295, ORC)</h3>
-      <p>A tábla és az ábra a nyilvános <strong>ORC Club-bizonylatból</strong> való: Aiolos, HUN 295, Elan 295, bizonylat <strong>006/26 (2026)</strong>, ORC hivatkozás <strong>04890004NPW</strong>, kiadva 2026. április 29-én, érvényes 2026. december 31-ig, VPP 2026 1.00. A bizonylat az ORC oldalán érhető el: <a href="https://sas.orc.org/sasapi/cc/04890004NPW" target="_blank" rel="noopener">sas.orc.org/sasapi/cc/04890004NPW</a> (megnyitáskor az oldal kérheti, hogy igazold: nem vagy robot).</p>
-      <p>A bizonylat 4–24 csomós szelekre ad adatot; a tábla, az ábra és a tervező is ezt a tartományt használja. Az oszlopok a valódi szélsebességet (TWS, csomó), a sorok a TWA-t mutatják; a cellák a hajósebességet csomóban. Az éles TWA, az éles VMG, a bőszeles TWA és a bőszeles VMG külön sor. A bőszeles értékek a táblában és az ábrán látszanak, a számítás jelenleg még nem használja őket.</p>
-      <p>A tervező útvonalszámítása ezt a 2026-os bizonylatot használja, a 4 és a 24 csomós oszloppal együtt. Éles menetben a bizonylat éles TWA-jával és éles VMG-jével számol; 10° alatt nem halad, a kettő között a sebesség úgy nő, hogy a szél felé mutató VMG éppen az éles TWA-n legyen a legnagyobb. 150° után a tábla utolsó két pontjából lineárisan extrapolál. (Az Elan 310 polárja 6–20 csomós, bőszeles TWA és bőszeles VMG nélkül; a 10°-os holtszög és az éles VMG-csúcs ott is ugyanígy működik.)</p>
+      <p>A tábla és az ábra a nyilvános <strong>ORC Club-bizonylatból</strong> való.</p>
+      <p>A bizonylat 4–24 csomós szelekre ad adatot; a tábla, az ábra és a tervező is ezt a tartományt használja. Az oszlopok a valódi szélsebességet (TWS, csomó), a sorok a TWA-t mutatják; a cellák a hajósebességet csomóban. Az éles TWA, az éles VMG, a bőszeles TWA és a bőszeles VMG külön sor.</p>
+      <p>A tervező útvonalszámítása ezt a 2026-os bizonylatot használja, a 4 és a 24 csomós oszloppal együtt. Éles menetben a bizonylat éles TWA-jával és éles VMG-jével számol; 10° alatt nem halad, a kettő között a sebesség úgy nő, hogy a szél felé mutató VMG éppen az éles TWA-n legyen a legnagyobb. 150° után a tábla utolsó két pontjából lineárisan extrapolál.</p>
       <div class="polar-wrap">
         <table class="polar-table">
           <caption>Aiolos – Elan 295 (HUN 295), ORC Club-bizonylat 006/26 (2026) — hajósebesség, kn</caption>
@@ -259,7 +259,7 @@
       </div>
       <p class="caption">A polárdiagram a fenti tábla értékeit rajzolja ki, mindkét csapásra (bal- és jobbcsapásra) tükrözve. A szél az ábra teteje felől fúj. A teli pontok az éles TWA-t, az üres körök a bőszeles TWA-t jelölik.</p>
 
-      <h3 id="nincs-adat">Hol nincs táblabeli adat?</h3>
+      <h3 id="nincs-adat">Ahol nincs táblabeli adat</h3>
       <p>A polár csak bizonyos szelekre és TWA-kra ad kész számot. Ahol nincs táblabeli pont, a tervező így számol:</p>
       <ul>
         <li>A széloszlopok között (például 9 csomó, vagy az Aiolosnál 22 csomó a 20 és 24 csomós oszlop között) a szomszédos oszlopok között lineárisan interpolál.</li>
